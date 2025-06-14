@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narrative Framing Demo - Interactive Model</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="demo-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">Narrative Framing</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="#demo" class="nav-link active">Demo</a></li>
+                <li><a href="index.html#method" class="nav-link">Method</a></li>
+                <li><a href="index.html#results" class="nav-link">Results</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero demo-hero">
+        <div class="container">
+            <h1 class="paper-title">Narrative Framing Model Demo</h1>
+            <p class="demo-subtitle">Analyze news articles to identify narrative framing components using our trained model</p>
+        </div>
+    </header>
+
+    <!-- Main Demo Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Demo Section -->
+            <section id="demo" class="section demo-section">
+                <h2 class="section-title">Interactive Model Demo</h2>
+                <div class="demo-container">
+                    <!-- Input Section -->
+                    <div class="input-section">
+                        <h3>Input Article</h3>
+                        <p class="input-description">
+                            Paste a news article below to analyze its narrative framing components. 
+                            Our model will identify heroes, villains, victims, focus, conflict type, and cultural story.
+                        </p>
+                        
+                        <div class="input-controls">
+                            <div class="sample-articles">
+                                <label for="sample-select">Try a sample article:</label>
+                                <select id="sample-select" class="sample-dropdown">
+                                    <option value="">Select a sample...</option>
+                                    <option value="climate1">Climate Change - Skeptical Framing</option>
+                                    <option value="climate2">Climate Change - Activist Framing</option>
+                                    <option value="covid1">COVID-19 - Government Response</option>
+                                </select>
+                                <button id="load-sample" class="btn btn-secondary">Load Sample</button>
+                            </div>
+                        </div>
+
+                        <textarea 
+                            id="article-input" 
+                            class="article-textarea" 
+                            placeholder="Paste your news article here..."
+                            rows="12"
+                        ></textarea>
+                        
+                        <div class="input-actions">
+                            <button id="analyze-btn" class="btn btn-primary">
+                                <span class="btn-text">Analyze Article</span>
+                                <span class="btn-loading" style="display: none;">
+                                    <span class="spinner"></span> Analyzing...
+                                </span>
+                            </button>
+                            <button id="clear-btn" class="btn btn-outline">Clear</button>
+                        </div>
+                    </div>
+
+                    <!-- Results Section -->
+                    <div class="results-section">
+                        <h3>Analysis Results</h3>
+                        <div id="results-container" class="results-container">
+                            <div class="no-results">
+                                <div class="no-results-icon">🔍</div>
+                                <p>Enter an article above and click "Analyze Article" to see the narrative framing predictions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section class="section how-it-works">
+                <h2 class="section-title">How It Works</h2>
+                <div class="how-it-works-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Input Article</h3>
+                        <p>Paste or type a news article into the text area. The model works best with complete articles of 100+ words.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Model Analysis</h3>
+                        <p>Our trained language model analyzes the text to identify narrative framing components using the framework described in our paper.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>View Results</h3>
+                        <p>See predictions for characters (hero, villain, victim), narrative focus, conflict type, and underlying cultural story.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Framework Reference -->
+            <section class="section framework-reference">
+                <h2 class="section-title">Framework Components</h2>
+                <div class="framework-grid">
+                    <div class="framework-card">
+                        <h3>🦸‍♂️ Characters</h3>
+                        <p><strong>Hero:</strong> Entities portrayed positively</p>
+                        <p><strong>Villain:</strong> Entities portrayed negatively</p>
+                        <p><strong>Victim:</strong> Entities portrayed as suffering</p>
+                    </div>
+                    <div class="framework-card">
+                        <h3>🎯 Focus</h3>
+                        <p><strong>Hero-focused:</strong> Emphasizes positive actors</p>
+                        <p><strong>Villain-focused:</strong> Emphasizes negative actors</p>
+                        <p><strong>Victim-focused:</strong> Emphasizes those affected</p>
+                    </div>
+                    <div class="framework-card">
+                        <h3>⚔️ Conflict</h3>
+                        <p><strong>Fuel Conflict:</strong> Actions causing problems</p>
+                        <p><strong>Fuel Resolution:</strong> Actions solving problems</p>
+                        <p><strong>Prevent Conflict:</strong> Opposing harmful actions</p>
+                        <p><strong>Prevent Resolution:</strong> Blocking solutions</p>
+                    </div>
+                    <div class="framework-card">
+                        <h3>🏛️ Cultural Story</h3>
+                        <p><strong>Individualistic:</strong> Personal responsibility</p>
+                        <p><strong>Hierarchical:</strong> Institutional control</p>
+                        <p><strong>Egalitarian:</strong> Collective action</p>
+                        <p><strong>Fatalistic:</strong> External forces</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Narrative Framing Research Team. All rights reserved.</p>
+            <p>For questions about the demo or model, contact: <a href="mailto:y.otmakhova@unimelb.edu.au">y.otmakhova@unimelb.edu.au</a></p>
+        </div>
+    </footer>
+
+    <!-- Results Template (hidden) -->
+    <template id="results-template">
+        <div class="results-content">
+            <div class="confidence-indicator">
+                <span class="confidence-label">Overall Confidence:</span>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" style="width: 0%"></div>
+                </div>
+                <span class="confidence-value">0%</span>
+            </div>
+
+            <div class="predictions-grid">
+                <div class="prediction-card hero-card">
+                    <h4>🦸‍♂️ Hero</h4>
+                    <div class="prediction-value"></div>
+                    <div class="prediction-confidence"></div>
+                </div>
+                <div class="prediction-card villain-card">
+                    <h4>🦹‍♂️ Villain</h4>
+                    <div class="prediction-value"></div>
+                    <div class="prediction-confidence"></div>
+                </div>
+                <div class="prediction-card victim-card">
+                    <h4>😢 Victim</h4>
+                    <div class="prediction-value"></div>
+                    <div class="prediction-confidence"></div>
+                </div>
+                <div class="prediction-card focus-card">
+                    <h4>🎯 Focus</h4>
+                    <div class="prediction-value"></div>
+                    <div class="prediction-confidence"></div>
+                </div>
+                <div class="prediction-card conflict-card">
+                    <h4>⚔️ Conflict</h4>
+                    <div class="prediction-value"></div>
+                    <div class="prediction-confidence"></div>
+                </div>
+                <div class="prediction-card cultural-card">
+                    <h4>🏛️ Cultural Story</h4>
+                    <div class="prediction-value"></div>
+                    <div class="prediction-confidence"></div>
+                </div>
+            </div>
+
+            <div class="detailed-analysis">
+                <h4>Detailed Analysis</h4>
+                <div class="analysis-text"></div>
+            </div>
+        </div>
+    </template>
+
+    <script src="demo-script.js"></script>
+</body>
+</html>
