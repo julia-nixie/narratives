@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Narrative Framing Example</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8B7EC8 0%, #4ECDC4 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .article-container {
+            position: relative;
+            padding: 40px;
+            background: #fafafa;
+        }
+
+        .article-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .article-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #8B7EC8;
+        }
+
+        /* Highlighting styles */
+        .hero {
+            background: linear-gradient(120deg, #a8e6cf 0%, #88d8a3 100%);
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .villain {
+            background: linear-gradient(120deg, #ffaaa5 0%, #ff8a80 100%);
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .victim {
+            background: linear-gradient(120deg, #ffd3a5 0%, #fd9853 100%);
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .focus {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .conflict {
+            background: linear-gradient(120deg, #d299c2 0%, #fef9d7 100%);
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .cultural-story {
+            background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        /* Hover effects */
+        .hero:hover, .villain:hover, .victim:hover, .focus:hover, .conflict:hover, .cultural-story:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: #8B7EC8;
+        }
+
+        /* Tooltip styles */
+        .tooltip {
+            position: absolute;
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            max-width: 300px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+
+        .tooltip::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: #2c3e50;
+        }
+
+        .tooltip.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .tooltip h4 {
+            margin: 0 0 8px 0;
+            color: #4ECDC4;
+            font-size: 16px;
+        }
+
+        .tooltip p {
+            margin: 0;
+        }
+
+        /* Analysis panel */
+        .analysis-panel {
+            margin-top: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .analysis-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .analysis-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #8B7EC8;
+        }
+
+        .analysis-card h3 {
+            margin: 0 0 10px 0;
+            color: #8B7EC8;
+            font-size: 18px;
+        }
+
+        .analysis-card p {
+            margin: 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .instructions {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #e8f4fd;
+            border-radius: 10px;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .instructions strong {
+            color: #8B7EC8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .article-container {
+                padding: 20px;
+            }
+            
+            .article-text {
+                padding: 20px;
+            }
+            
+            .legend {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Interactive Narrative Framing Analysis</h1>
+            <p>Hover over highlighted text to explore the framework components</p>
+        </div>
+
+        <div class="article-container">
+            <div class="instructions">
+                <strong>Instructions:</strong> Hover your cursor over the highlighted text below to see detailed explanations of each narrative framing component.
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color hero"></div>
+                    <span>Hero (Denialist Scientists)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color villain"></div>
+                    <span>Villain (Climate Advocates)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color victim"></div>
+                    <span>Victim (Implied)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color focus"></div>
+                    <span>Focus (On Hero)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color conflict"></div>
+                    <span>Fuels Conflict</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color cultural-story"></div>
+                    <span>Individualistic Story</span>
+                </div>
+            </div>
+
+            <div class="article-text">
+                <div class="article-title">Global warming fail: Study finds melting sea ice is actually helping Arctic animals</div>
+                
+                <p><span class="villain" data-tooltip="villain">Proponents of the theory humans are primarily responsible for rising global temperatures</span> long claimed wildlife are harmed significantly by global warming, and that unless mankind stops producing significant amounts of carbon-dioxide emissions, the world's animals will not be able to thrive.</p>
+                
+                <p>While rising temperatures have certainly put a strain on species in some parts of the world, <span class="hero focus" data-tooltip="hero-focus">a new study by researchers at the University of Southern Denmark</span> suggests <span class="cultural-story" data-tooltip="cultural-story">animals in the Arctic region are thriving because of higher global temperatures</span>.</p>
+                
+                <p><span class="villain" data-tooltip="villain-media">USA Today recently declared the loss of sea ice "terrifying,"</span> but <span class="hero conflict" data-tooltip="hero-conflict">global warming skeptics have long suggested these claims are overblown when put into perspective</span>.</p>
+            </div>
+
+            <div class="analysis-panel">
+                <div class="analysis-title">Narrative Framework Analysis</div>
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <h3>🦸‍♂️ Hero</h3>
+                        <p><strong>Denialist Scientists:</strong> The University of Southern Denmark researchers are framed as heroes providing "truth" against mainstream climate science.</p>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>🦹‍♂️ Villain</h3>
+                        <p><strong>Climate Advocates:</strong> Climate scientists and media outlets like USA Today are portrayed as alarmists spreading fear.</p>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>🎯 Focus</h3>
+                        <p><strong>Hero-Focused:</strong> The narrative emphasizes the "heroic" research that challenges mainstream climate science.</p>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>⚔️ Conflict</h3>
+                        <p><strong>Fuels Conflict:</strong> Promotes harmful pseudoscience that undermines climate action efforts.</p>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>🏛️ Cultural Story</h3>
+                        <p><strong>Individualistic:</strong> Implies nature is resilient and will fix itself without external intervention or group action.</p>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>📊 Impact</h3>
+                        <p><strong>Framing Effect:</strong> Replaces the default interpretation of climate harm with the opposing idea that animals benefit from warming.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltip element -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // Tooltip data
+        const tooltipData = {
+            'villain': {
+                title: '🦹‍♂️ Villain: Climate Advocates',
+                content: 'Climate scientists and advocates are framed as the antagonists who spread fear and misinformation about climate change impacts on wildlife.'
+            },
+            'hero-focus': {
+                title: '🦸‍♂️ Hero + 🎯 Focus',
+                content: 'The University of Southern Denmark researchers are positioned as heroes providing "objective" science. The narrative focuses on their findings to support the overall message.'
+            },
+            'cultural-story': {
+                title: '🏛️ Cultural Story: Individualistic',
+                content: 'This reflects an individualistic cultural story - nature is resilient and self-regulating, requiring no external control or collective action to address climate change.'
+            },
+            'villain-media': {
+                title: '🦹‍♂️ Villain: Media',
+                content: 'USA Today is portrayed as part of the villain group, using "terrifying" language to unnecessarily frighten the public about climate impacts.'
+            },
+            'hero-conflict': {
+                title: '🦸‍♂️ Hero + ⚔️ Fuels Conflict',
+                content: 'Global warming skeptics are framed as heroes who provide perspective, but this actually fuels conflict by promoting pseudoscience that undermines climate action.'
+            }
+        };
+
+        // Get tooltip element
+        const tooltip = document.getElementById('tooltip');
+
+        // Add event listeners to all highlighted elements
+        document.querySelectorAll('[data-tooltip]').forEach(element => {
+            element.addEventListener('mouseenter', showTooltip);
+            element.addEventListener('mouseleave', hideTooltip);
+            element.addEventListener('mousemove', moveTooltip);
+        });
+
+        function showTooltip(e) {
+            const tooltipKey = e.target.getAttribute('data-tooltip');
+            const data = tooltipData[tooltipKey];
+            
+            if (data) {
+                tooltip.innerHTML = `<h4>${data.title}</h4><p>${data.content}</p>`;
+                tooltip.classList.add('show');
+                moveTooltip(e);
+            }
+        }
+
+        function hideTooltip() {
+            tooltip.classList.remove('show');
+        }
+
+        function moveTooltip(e) {
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            let left = e.pageX - tooltipRect.width / 2;
+            let top = e.pageY - tooltipRect.height - 15;
+            
+            // Adjust if tooltip goes off screen
+            if (left < 10) left = 10;
+            if (left + tooltipRect.width > viewportWidth - 10) {
+                left = viewportWidth - tooltipRect.width - 10;
+            }
+            if (top < 10) {
+                top = e.pageY + 15;
+            }
+            
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+
+        // Add smooth scrolling and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on load
+            const elements = document.querySelectorAll('.article-text, .analysis-panel, .legend');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Add click tracking for analytics
+        document.querySelectorAll('[data-tooltip]').forEach(element => {
+            element.addEventListener('click', function() {
+                const tooltipKey = this.getAttribute('data-tooltip');
+                console.log('Clicked on:', tooltipKey);
+                // You can add analytics tracking here
+            });
+        });
+    </script>
+</body>
+</html>
