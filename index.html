@@ -17,6 +17,7 @@
                 <li><a href="#abstract" class="nav-link">Abstract</a></li>
                 <li><a href="#introduction" class="nav-link">Introduction</a></li>
                 <li><a href="#method" class="nav-link">Method</a></li>
+                <li><a href="#demo" class="nav-link">Demo</a></li>
                 <li><a href="#experiments" class="nav-link">Experiments</a></li>
                 <li><a href="#results" class="nav-link">Results</a></li>
                 <li><a href="#conclusion" class="nav-link">Conclusion</a></li>
@@ -128,6 +129,139 @@
                             <p><span class="villain" data-tooltip="villain-media">USA Today recently declared the loss of sea ice "terrifying,"</span> but <span class="hero conflict" data-tooltip="hero-conflict">global warming skeptics have long suggested these claims are overblown when put into perspective</span>.</p>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- Model Demo -->
+            <section id="demo" class="section">
+                <h2 class="section-title">Interactive Model Demo</h2>
+                <div class="section-content">
+                    <p>Test our narrative framing model with your own articles. Our trained model will identify heroes, villains, victims, focus, conflict type, and cultural story components.</p>
+                    
+                    <div class="demo-container">
+                        <!-- Input Section -->
+                        <div class="input-section">
+                            <h3>Input Article</h3>
+                            <p class="input-description">
+                                Paste a news article below to analyze its narrative framing components. 
+                                Our model will identify heroes, villains, victims, focus, conflict type, and cultural story.
+                            </p>
+                            
+                            <div class="input-controls">
+                                <div class="sample-articles">
+                                    <label for="sample-select">Try a sample article:</label>
+                                    <select id="sample-select" class="sample-dropdown">
+                                        <option value="">Select a sample...</option>
+                                        <option value="climate1">Climate Change - Skeptical Framing</option>
+                                        <option value="climate2">Climate Change - Activist Framing</option>
+                                        <option value="covid1">COVID-19 - Government Response</option>
+                                    </select>
+                                    <button id="load-sample" class="btn btn-secondary">Load Sample</button>
+                                </div>
+                            </div>
+
+                            <textarea 
+                                id="article-input" 
+                                class="article-textarea" 
+                                placeholder="Paste your news article here..."
+                                rows="12"
+                            ></textarea>
+                            
+                            <div class="input-actions">
+                                <button id="analyze-btn" class="btn btn-primary">
+                                    <span class="btn-text">Analyze Article</span>
+                                    <span class="btn-loading" style="display: none;">
+                                        <span class="spinner"></span> Analyzing...
+                                    </span>
+                                </button>
+                                <button id="clear-btn" class="btn btn-outline">Clear</button>
+                            </div>
+                        </div>
+
+                        <!-- Results Section -->
+                        <div class="results-section">
+                            <h3>Analysis Results</h3>
+                            <div id="results-container" class="results-container">
+                                <div class="no-results">
+                                    <div class="no-results-icon">🔍</div>
+                                    <p>Enter an article above and click "Analyze Article" to see the narrative framing predictions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- How It Works -->
+                    <div class="how-it-works-section">
+                        <h3>How It Works</h3>
+                        <div class="how-it-works-grid">
+                            <div class="step-card">
+                                <div class="step-number">1</div>
+                                <h4>Input Article</h4>
+                                <p>Paste or type a news article into the text area. The model works best with complete articles of 100+ words.</p>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">2</div>
+                                <h4>Model Analysis</h4>
+                                <p>Our trained language model analyzes the text to identify narrative framing components using the framework described above.</p>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">3</div>
+                                <h4>View Results</h4>
+                                <p>See predictions for characters (hero, villain, victim), narrative focus, conflict type, and underlying cultural story.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results Template (hidden) -->
+                    <template id="results-template">
+                        <div class="results-content">
+                            <div class="confidence-indicator">
+                                <span class="confidence-label">Overall Confidence:</span>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" style="width: 0%"></div>
+                                </div>
+                                <span class="confidence-value">0%</span>
+                            </div>
+
+                            <div class="predictions-grid">
+                                <div class="prediction-card hero-card">
+                                    <h4>🦸‍♂️ Hero</h4>
+                                    <div class="prediction-value"></div>
+                                    <div class="prediction-confidence"></div>
+                                </div>
+                                <div class="prediction-card villain-card">
+                                    <h4>🦹‍♂️ Villain</h4>
+                                    <div class="prediction-value"></div>
+                                    <div class="prediction-confidence"></div>
+                                </div>
+                                <div class="prediction-card victim-card">
+                                    <h4>😢 Victim</h4>
+                                    <div class="prediction-value"></div>
+                                    <div class="prediction-confidence"></div>
+                                </div>
+                                <div class="prediction-card focus-card">
+                                    <h4>🎯 Focus</h4>
+                                    <div class="prediction-value"></div>
+                                    <div class="prediction-confidence"></div>
+                                </div>
+                                <div class="prediction-card conflict-card">
+                                    <h4>⚔️ Conflict</h4>
+                                    <div class="prediction-value"></div>
+                                    <div class="prediction-confidence"></div>
+                                </div>
+                                <div class="prediction-card cultural-card">
+                                    <h4>🏛️ Cultural Story</h4>
+                                    <div class="prediction-value"></div>
+                                    <div class="prediction-confidence"></div>
+                                </div>
+                            </div>
+
+                            <div class="detailed-analysis">
+                                <h4>Detailed Analysis</h4>
+                                <div class="analysis-text"></div>
+                            </div>
+                        </div>
+                    </template>
                 </div>
             </section>
 
@@ -388,5 +522,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
     <script src="script.js"></script>
+    <script src="demo-script.js"></script>
 </body>
 </html>
