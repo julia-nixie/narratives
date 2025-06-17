@@ -14,9 +14,9 @@
         <div class="nav-container">
             <div class="nav-logo">Narrative Framing</div>
             <ul class="nav-menu">
-                <li><a href="#abstract" class="nav-link">Abstract</a></li>
                 <li><a href="#introduction" class="nav-link">Introduction</a></li>
                 <li><a href="#method" class="nav-link">Method</a></li>
+                <li><a href="#comparisons" class="nav-link">Comparisons</a></li>
                 <li><a href="#demo" class="nav-link">Demo</a></li>
                 <li><a href="#experiments" class="nav-link">Experiments</a></li>
                 <li><a href="#results" class="nav-link">Results</a></li>
@@ -42,8 +42,8 @@
                 <span class="status">Full Paper</span>
             </div>
             <div class="hero-buttons">
-                <a href="#" class="btn btn-primary">📄 Read Paper</a>
-                <a href="#" class="btn btn-secondary">💻 View Code</a>
+                <a href="https://arxiv.org/pdf/2506.00737" class="btn btn-secondary">📄 Paper</a>
+                <a href="demo.html" class="btn btn-secondary">🤖 Demo</a>
                 <a href="#" class="btn btn-secondary">📊 Dataset</a>
             </div>
         </div>
@@ -52,31 +52,22 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <!-- Abstract -->
-            <section id="abstract" class="section">
-                <h2 class="section-title">Abstract</h2>
-                <div class="section-content">
-                    <p>Narrative frames are a powerful way of conceptualizing and communicating complex, controversial ideas, however automated frame analysis to date has mostly overlooked this framing device. In this paper, we connect elements of narrativity with fundamental aspects of framing, and present a framework which formalizes and operationalizes such aspects. We annotate and release a data set of news articles in the climate change domain, analyze the dominance of narrative frame components across political leanings, and test LLMs in their ability to predict narrative frames and their components. Finally, we apply our framework in an unsupervised way to elicit components of narrative framing in a second domain, the COVID-19 crisis, where our predictions are congruent with prior theoretical work showing the generalizability of our approach.</p>
-                </div>
-            </section>
-
             <!-- Introduction -->
             <section id="introduction" class="section">
-                <h2 class="section-title">Introduction</h2>
+                <h2 class="section-title">What lies beyond the tip of the "narrative" iceberg?</h2>
                 <div class="section-content">
-                    <p>Narrative framing is a type of media framing that uses elements of narrativity to highlight some aspects of a complex issue and condense it into a simplified "story" that promotes a particular interpretation. These elements of storytelling, such as representing an issue through the lens of stakeholders and conflicts rather than direct description of the facts, make narrative frames a highly effective device, particularly in the context of contested issues such as climate change.</p>
+                    <p>Narrative frames is a type of media frames that use elements of narrativity to highlight some aspects of a complex issue and condense it into a simplified "story" that promotes a particular interpretation. These elements of storytelling, such as representing an issue through the lens of stakeholders and conflicts rather than direct description of the facts, make narrative frames a highly effective device, particularly in the context of contested issues such as climate change.</p>
                     
-                    <p>While the importance of framing narratives for the communication and perception of news has been widely recognized in the social sciences, automatic framing analysis still mostly conceptualizes frames in a topic-like fashion. Recent work in NLP has studied elements of narratives such as characters or events in news reporting, but these studies either lose the link to the core mechanism of framing or are topic-specific.</p>
+                    <p>Despite that, automatic framing analysis still mostly disregards narrative frames and conceptualizes frames in a topic-like fashion. Recent work in NLP has studied elements of narratives such as characters or events in news reporting, but these studies often lose the link to the core mechanism of framing, and do not allow to abstract away from particular events and characters in order to differentiate between contrasting narrative frames.</p>
 
-                    <p>For framing to occur, an <strong>ambivalent issue</strong> must be present and described in a way that <strong>evokes a larger interpretative context</strong> which goes beyond information directly inferrable from the text. Key challenges in narrative framing analysis include:</p>
+                    <p>In our work, we dissect narratives into components which allow to link them to mechanisms of framing, on one hand, and help to understand, distinsguish, and model them. We show how:</p>
                     <ul>
-                        <li><strong>Character Roles:</strong> Identifying and categorizing heroes, villains, and victims in political discourse</li>
-                        <li><strong>Conflict Resolution:</strong> Understanding how narratives present causes and solutions to complex issues</li>
-                        <li><strong>Cultural Context:</strong> Linking narratives to broader cultural stories and value systems</li>
-                        <li><strong>Computational Analysis:</strong> Developing automated methods to detect and analyze narrative frames at scale</li>
+                        <li><strong>Character roles</strong> (framing particular entities as heroes, villains, and victims) as well as <strong>focus</strong> on a particular character helps to resolve <strong>ambivalence</strong> of interpretation (which is necessary for framing to occur) and assign a particular <strong>moral evaluation</strong>.</li>
+                        <li><strong>Conflict and resolution</strong> represent causes and solutions to complex issues, which are core elements of their framing.</li>
+                        <li><strong>Cultural stories</strong> link to broader value systems, allowing the frames to evoke wider associations existing in the culture.</li>
                     </ul>
 
-                    <p>In this work, we present a general formalization of narrative framing that integrates elements of narratology with social and media studies, establishing a framework that allows identification and structural representation of narrative frames across different domains.</p>
+                    <p>Let's take a deeper look at these components and see how they allow to uniquely represent narrative frames and distinguish between them.</p>
                 </div>
             </section>
 
@@ -84,13 +75,11 @@
             <section id="method" class="section">
                 <h2 class="section-title">Components of Narrative Framing</h2>
                 <div class="section-content">
-                    <h3>Framework Overview</h3>
-                    <p>Our framework defines narrative frames through three core components that contribute to the framing mechanism: <strong>Characters</strong> (resolving ambivalence through moral evaluation), <strong>Conflict and Resolution</strong> (capturing the conflict aspect of frames), and <strong>Cultural Stories</strong> (evoking wider cognitive schemata and cultural associations).</p>
-
+        
                     <h3>Characters</h3>
                     <p>Characters and their prototypical roles follow the simplified <strong>hero, villain, and victim (HVV)</strong> triad from the Narrative Policy Framework. By assigning entities to particular roles, we resolve issue ambivalence by conveying moral judgment. The framework distinguishes between main characters and other entities, using the <strong>single most central character</strong> fulfilling each role.</p>
                     
-                    <p>To differentiate narratives, we identify the <strong>focus</strong> on either hero, villain, or victim, resulting in "heroic", "blaming", and "victimizing" narrative frames respectively.</p>
+                    <p>To differentiate narratives, we also identify the <strong>focus</strong> on either hero, villain, or victim, resulting in "heroic", "blaming", and "victimizing" narrative frames respectively.</p>
 
                     <h3>Conflict and Resolution</h3>
                     <p>This component encapsulates the "plot" element and links to framing criteria that point to causes and resolutions. We conceptualize this as a four-way distinction where characters can:</p>
@@ -104,7 +93,6 @@
                     <h3>Cultural Stories</h3>
                     <p>Cultural stories map narrative combinations to four larger interpretation schemata, defining the degree of external control and group belonging:</p>
                     <div class="formula">
-                        <p><strong>Four Cultural Stories:</strong></p>
                         <ul>
                             <li><strong>Fatalist:</strong> People at mercy of external forces (natural disasters, fate)</li>
                             <li><strong>Hierarchical:</strong> Bound by social prescriptions and external control (government)</li>
@@ -115,7 +103,7 @@
 
                     <!-- Interactive Example -->
                     <div class="interactive-example-container">
-                        <h3>Interactive Example</h3>
+                        <h3>Interactive Example: Are melting icebergs actually good for us?</h3>
                         <p class="example-description">Hover over the highlighted text below to explore how narrative framing components work in practice:</p>
                         
 
@@ -127,6 +115,149 @@
                             <p>While rising temperatures have certainly put a strain on species in some parts of the world, <span class="hero focus" data-tooltip="hero-focus">a new study by researchers at the University of Southern Denmark</span> suggests <span class="cultural-story" data-tooltip="cultural-story">animals in the Arctic region are thriving because of higher global temperatures</span>.</p>
                             
                             <p><span class="villain" data-tooltip="villain-media">USA Today recently declared the loss of sea ice "terrifying,"</span> but <span class="hero conflict" data-tooltip="hero-conflict">global warming skeptics have long suggested these claims are overblown when put into perspective</span>.</p>
+                        </div>
+                        <p>Overall, this structure points to a denialist narrative frame ``No need to act'' which questions or ridicules the reality of climate change.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Narrative Comparison Examples -->
+            <section id="comparisons" class="section">
+                <h2 class="section-title">Distinguishing Similar Narratives</h2>
+                <div class="section-content">
+                    <p>Understanding how subtle differences in narrative framing can completely change the interpretation of similar events is crucial. Scroll through these examples to see how changes in a narrative frame structure lead to contrasting ways of framing.</p>
+                    
+                    <div class="comparison-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-track">
+                                <!-- Example 1: Hero vs Villain -->
+                                <div class="comparison-slide">
+                                    <h3 class="comparison-title">Is Pope Francis the hero or the villain?</h3>
+                                    <div class="comparison-content">
+                                        <div class="article-column">
+                                            <h4>Villain</h4>
+                                            <div class="article-text">
+                                                <p>In his Message for the World Day of Prayer for the Care of Creation, the pope adopted the apocalyptic language encouraged by climate alarmists to frighten people into taking action. "Too many of us act like tyrants with regard to creation," he declared . "Let us make an effort to change and to adopt more simple and respectful lifestyles! "… The pope has apparently joined the climate alarmists in employing more incendiary language, dropping his former references to climate change to speak of a "climate emergency" and an "environmental crisis" in Sunday's message..."</p>
+                                            </div>
+                                        </div>
+                                        <div class="vs-divider">VS</div>
+                                        <div class="article-column">
+                                            <h4>Hero</h4>
+                                            <div class="article-text">
+                                                <p>Pope Francis told a group of lawyers that he could like to introduce the category of "ecological sin" into official Catholic teaching. "We must introduce – we are thinking about it – in the Catechism of the Catholic Church the sin against ecology, the ecological sin against the common home, because it is a duty," the pope said Friday in addressing participants in an international conference on penal law. More specifically, Francis said, are all those actions that can be considered as "ecocide," for instance, "the massive contamination of air, land and water resources...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="comparison-explanation">
+                                        Both articles talk about the same person, have the same topic and similar events. However, the article on the left frames Pope Francis as a villain for "frightening people" and represents a denialist narrative "Debate and scam", while the article on the right frames him as a hero who proposes specific changes to mitigate climate crisis ("Officials declare a climate emergency").
+                                    </div>
+                                </div>
+
+                                <!-- Example 2: Focus Shift -->
+                                <div class="comparison-slide">
+                                    <h3 class="comparison-title">What do we focus on?</h3>
+                                    <div class="comparison-content">
+                                        <div class="article-column">
+                                            <h4>Victim-Focused</h4>
+                                            <div class="article-text">
+                                                <p><strong>Small island nations</strong> face an existential threat as rising sea levels threaten to submerge entire communities. These <strong>vulnerable populations</strong> have contributed least to climate change yet suffer its worst consequences, losing their ancestral homes and cultural heritage.</p>
+                                            </div>
+                                        </div>
+                                        <div class="vs-divider">VS</div>
+                                        <div class="article-column">
+                                            <h4>Hero-Focused</h4>
+                                            <div class="article-text">
+                                                <p><strong>International climate scientists</strong> have developed innovative solutions to help island nations adapt to rising seas. These <strong>dedicated researchers</strong> work tirelessly to create floating cities and advanced sea walls, offering hope through technological innovation.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="comparison-explanation">
+                                        <strong>Key Difference:</strong> The first article focuses on victims (island nations) to evoke sympathy, while the second focuses on heroes (scientists) to inspire confidence in solutions.
+                                    </div>
+                                </div>
+
+                                <!-- Example 3: Cultural Stories -->
+                                <div class="comparison-slide">
+                                    <h3 class="comparison-title">Individual vs. collective responsibility</h3>
+                                    <div class="comparison-content">
+                                        <div class="article-column">
+                                            <h4>Individualistic Frame</h4>
+                                            <div class="article-text">
+                                                <p>Climate change can be solved through <strong>personal choices</strong> and market innovation. <strong>Conscious consumers</strong> drive demand for green products, while <strong>entrepreneurs</strong> develop clean technologies. Government interference only slows down these natural market solutions.</p>
+                                            </div>
+                                        </div>
+                                        <div class="vs-divider">VS</div>
+                                        <div class="article-column">
+                                            <h4>Egalitarian Frame</h4>
+                                            <div class="article-text">
+                                                <p>Climate change requires <strong>collective action</strong> and systemic change. <strong>Communities</strong> must work together to pressure governments and corporations. Only through <strong>coordinated global efforts</strong> can we address this crisis that affects everyone equally.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="comparison-explanation">
+                                        <strong>Key Difference:</strong> The individualistic frame emphasizes personal responsibility and market solutions, while the egalitarian frame stresses collective action and systemic change.
+                                    </div>
+                                </div>
+
+                                <!-- Example 4: Conflict Type -->
+                                <div class="comparison-slide">
+                                    <h3 class="comparison-title">Fueling conflict vs. preventing resolution</h3>
+                                    <div class="comparison-content">
+                                        <div class="article-column">
+                                            <h4>Fueling Conflict</h4>
+                                            <div class="article-text">
+                                                <p><strong>Fossil fuel companies</strong> continue to expand drilling operations despite climate warnings. These <strong>corporate polluters</strong> prioritize short-term profits over planetary health, accelerating the climate crisis through their reckless pursuit of oil and gas.</p>
+                                            </div>
+                                        </div>
+                                        <div class="vs-divider">VS</div>
+                                        <div class="article-column">
+                                            <h4>Preventing Resolution</h4>
+                                            <div class="article-text">
+                                                <p><strong>Environmental extremists</strong> block essential energy infrastructure projects needed for economic stability. These <strong>radical protesters</strong> prevent the development of cleaner energy alternatives by opposing all industrial development, hindering progress toward practical solutions.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="comparison-explanation">
+                                        <strong>Key Difference:</strong> The first frames fossil fuel companies as actively worsening the problem, while the second frames environmental groups as preventing solutions from being implemented.
+                                    </div>
+                                </div>
+
+                                <!-- Example 5: Victim Assignment -->
+                                <div class="comparison-slide">
+                                    <h3 class="comparison-title">Who are the real victims?</h3>
+                                    <div class="comparison-content">
+                                        <div class="article-column">
+                                            <h4>Environmental Victims</h4>
+                                            <div class="article-text">
+                                                <p><strong>Wildlife populations</strong> are collapsing due to habitat destruction and pollution. <strong>Endangered species</strong> face extinction while <strong>ecosystems</strong> that took millennia to develop are destroyed in decades by industrial expansion and climate change.</p>
+                                            </div>
+                                        </div>
+                                        <div class="vs-divider">VS</div>
+                                        <div class="article-column">
+                                            <h4>Economic Victims</h4>
+                                            <div class="article-text">
+                                                <p><strong>Working families</strong> lose their livelihoods as environmental regulations shut down industries. <strong>Rural communities</strong> that depend on mining and logging face economic devastation, while <strong>blue-collar workers</strong> struggle to find alternative employment.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="comparison-explanation">
+                                        <strong>Key Difference:</strong> One narrative positions nature as the victim of human activity, while the other positions workers as victims of environmental policies.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Navigation arrows -->
+                        <button class="carousel-btn carousel-btn-prev" aria-label="Previous example">‹</button>
+                        <button class="carousel-btn carousel-btn-next" aria-label="Next example">›</button>
+                        
+                        <!-- Dots indicator -->
+                        <div class="carousel-dots">
+                            <button class="carousel-dot active" data-slide="0"></button>
+                            <button class="carousel-dot" data-slide="1"></button>
+                            <button class="carousel-dot" data-slide="2"></button>
+                            <button class="carousel-dot" data-slide="3"></button>
+                            <button class="carousel-dot" data-slide="4"></button>
                         </div>
                     </div>
                 </div>
@@ -190,27 +321,6 @@
                         </div>
                     </div>
 
-                    <!-- How It Works -->
-                    <div class="how-it-works-section">
-                        <h3>How It Works</h3>
-                        <div class="how-it-works-grid">
-                            <div class="step-card">
-                                <div class="step-number">1</div>
-                                <h4>Input Article</h4>
-                                <p>Paste or type a news article into the text area. The model works best with complete articles of 100+ words.</p>
-                            </div>
-                            <div class="step-card">
-                                <div class="step-number">2</div>
-                                <h4>Model Analysis</h4>
-                                <p>Our trained language model analyzes the text to identify narrative framing components using the framework described above.</p>
-                            </div>
-                            <div class="step-card">
-                                <div class="step-number">3</div>
-                                <h4>View Results</h4>
-                                <p>See predictions for characters (hero, villain, victim), narrative focus, conflict type, and underlying cultural story.</p>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- Results Template (hidden) -->
                     <template id="results-template">
@@ -267,153 +377,117 @@
 
             <!-- Experiments -->
             <section id="experiments" class="section">
-                <h2 class="section-title">Experiments</h2>
+                <h2 class="section-title">Experiments and analysis</h2>
                 <div class="section-content">
-                    <h3>Data and Annotation</h3>
-                    <p>We manually annotate 100 articles randomly selected from news stories on climate change, originating from US media outlets with different political leanings published between 2017 and 2019. The articles are evenly distributed across political leanings to ensure variety in narratives from different political groups.</p>
+                    <h3>On benefits of compositionality</h3>
+                    <p>To apply our framework, we rigorously annotate a dataset of climate-related articles published in the USA in 2017-2019, conduct extensive experiments with LLMs, and analyse the results in the context of political leanings. Please refer to our <a href="https://arxiv.org/pdf/2506.00737" style="color: var(--primary-purple); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--primary-purple); transition: var(--transition);" onmouseover="this.style.color='var(--primary-teal)'; this.style.borderBottomColor='var(--primary-teal)'" onmouseout="this.style.color='var(--primary-purple)'; this.style.borderBottomColor='var(--primary-purple)'">paper</a> for details.</p>
+                    <p>Notably, the component-focused approach to narrative frames demonstrates benefits in all these aspects:</p>
+                    
+                    <div class="benefits-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-track">
+                                <!-- Slide 1: Bar Chart -->
+                                <div class="benefits-slide">
+                                    <div class="slide-content">
+                                        <div class="chart-container">
+                                            <h4>Inter-Annotator Agreement Improvement</h4>
+                                            <div class="chart-layout">
+                                                <div class="vertical-bar-chart">
+                                                    <div class="chart-bars">
+                                                        <div class="vertical-bar-item">
+                                                            <div class="vertical-bar-wrapper">
+                                                                <div class="vertical-bar vertical-bar-low" style="height: 37%;">
+                                                                    <span class="vertical-bar-value">37%</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-bar-label">Direct Narrative Labeling</div>
+                                                        </div>
+                                                        <div class="vertical-bar-item">
+                                                            <div class="vertical-bar-wrapper">
+                                                                <div class="vertical-bar vertical-bar-high" style="height: 63%;">
+                                                                    <span class="vertical-bar-value">63%</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-bar-label">Labeling by Narrative Components</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="chart-commentary">
+                            
+                                                    <p>Narrative frame components can be reliably annotated, achieving Krippendorff α in the range of 0.67-0.82.</p>
+                                                    <p>Deriving the resulting narrative frame label from component annotations results in a much higher agreement than predicting the narrative frame directly (63% vs 37%).</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <h3>Annotation Process</h3>
-                    <p>Our annotation follows a two-stage process:</p>
-                    <ul>
-                        <li><strong>Stage 1:</strong> Four annotators (three external + one expert) identify main hero, villain, and victim characters and map them to stakeholder categories</li>
-                        <li><strong>Stage 2:</strong> Expert annotators determine focus, conflict/resolution, and cultural story components</li>
-                    </ul>
+                                <!-- Slide 2: Framework Structure -->
+                                <div class="benefits-slide">
+                                    <div class="slide-content">
+                                        <h4>Improved Model Performance</h4>
+                                        <div class="benefit-layout">
+                                            <div class="benefit-description">
+                                                <p>While regular LLM tricks like few-shot learning, PEFT and reasoning do not help to improve narrative prediction, including their structural components - even when predicted by the model rather than provided - does.</p>
+                                            </div>
+                                            <div class="benefit-image">
+                                                <img src="images/struct.jpg" alt="Framework Structure Diagram" class="framework-diagram">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <h3>LLM Evaluation Tasks</h3>
-                    <p>We test 5 base LLMs (GPT-4o, Mixtral, Llama, Gemini, Claude Sonnet) and one reasoning LLM (o1) on:</p>
-                    <ul>
-                        <li><strong>Character Prediction:</strong> Identifying stakeholder categories for hero, villain, victim (10 classes each)</li>
-                        <li><strong>Focus Prediction:</strong> Determining narrative focus (hero/villain/victim)</li>
-                        <li><strong>Conflict Prediction:</strong> Classifying conflict type (4 classes)</li>
-                        <li><strong>Cultural Story:</strong> Identifying cultural story type (3 classes)</li>
-                        <li><strong>Narrative Frame:</strong> Direct prediction of 16 narrative frames</li>
-                    </ul>
-
-                    <h3>COVID-19 Generalization</h3>
-                    <p>We apply our framework to politicians' speeches on COVID-19 from Germany (Angela Merkel), UK (Boris Johnson), and Australia (Scott Morrison) from February to July 2020, demonstrating cross-domain generalizability.</p>
-                </div>
-            </section>
-
-            <!-- Results -->
-            <section id="results" class="section">
-                <h2 class="section-title">Results</h2>
-                <div class="section-content">
-                    <h3>LLM Performance on Narrative Frame Tasks</h3>
-                    <div class="results-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Model</th>
-                                    <th>Hero F1</th>
-                                    <th>Villain F1</th>
-                                    <th>Victim F1</th>
-                                    <th>Focus F1</th>
-                                    <th>Conflict F1</th>
-                                    <th>Cultural Story F1</th>
-                                    <th>Narrative F1</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Baseline</td>
-                                    <td>0.079</td>
-                                    <td>0.080</td>
-                                    <td>0.135</td>
-                                    <td>0.231</td>
-                                    <td>0.135</td>
-                                    <td>0.190</td>
-                                    <td>0.021</td>
-                                </tr>
-                                <tr>
-                                    <td>GPT-4o</td>
-                                    <td>0.325</td>
-                                    <td>0.454</td>
-                                    <td>0.266</td>
-                                    <td>0.656</td>
-                                    <td>0.332</td>
-                                    <td>0.574</td>
-                                    <td>0.258</td>
-                                </tr>
-                                <tr>
-                                    <td>Mixtral</td>
-                                    <td>0.237</td>
-                                    <td>0.073</td>
-                                    <td>0.257</td>
-                                    <td>0.402</td>
-                                    <td>0.353</td>
-                                    <td>0.431</td>
-                                    <td>0.171</td>
-                                </tr>
-                                <tr>
-                                    <td>Llama</td>
-                                    <td>0.271</td>
-                                    <td>0.156</td>
-                                    <td>0.336</td>
-                                    <td>0.568</td>
-                                    <td>0.379</td>
-                                    <td>0.449</td>
-                                    <td>0.181</td>
-                                </tr>
-                                <tr>
-                                    <td>Gemini</td>
-                                    <td>0.326</td>
-                                    <td>0.292</td>
-                                    <td>0.230</td>
-                                    <td>0.635</td>
-                                    <td>0.361</td>
-                                    <td>0.482</td>
-                                    <td>0.319</td>
-                                </tr>
-                                <tr class="highlight">
-                                    <td><strong>Claude Sonnet</strong></td>
-                                    <td><strong>0.353</strong></td>
-                                    <td><strong>0.530</strong></td>
-                                    <td><strong>0.469</strong></td>
-                                    <td><strong>0.688</strong></td>
-                                    <td><strong>0.399</strong></td>
-                                    <td><strong>0.561</strong></td>
-                                    <td><strong>0.339</strong></td>
-                                </tr>
-                                <tr>
-                                    <td>o1-preview</td>
-                                    <td>0.363</td>
-                                    <td>0.527</td>
-                                    <td>0.455</td>
-                                    <td>0.718</td>
-                                    <td>0.549</td>
-                                    <td>0.595</td>
-                                    <td>0.330</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                <!-- Slide 3: Political Leaning Analysis -->
+                                <div class="benefits-slide">
+                                    <div class="slide-content">
+                                        <h4>Political Leaning Analysis</h4>
+                                        <div class="full-width-images">
+                                            <div class="dual-image-container">
+                                                <div class="dual-image-item">
+                                                    <img src="images/narr_leaning.jpg" alt="Narrative Political Leaning Analysis" class="framework-diagram">
+                                                </div>
+                                                <div class="dual-image-item">
+                                                    <img src="images/story_conflict.jpg" alt="Story Conflict Analysis" class="framework-diagram">
+                                                </div>
+                                            </div>
+                                            <div class="bottom-comments">
+                                                <div class="single-comment">While there are some trends in narrative frames used by left-bias and right-bias sources, the paterns become more prominent when we look at the components that underly them. For instance, as the picture on the right shows, right-leaning outlets favor individualistic narratives with "preventing resolution" framing, while left-leaning outlets emphasize collective action.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Navigation arrows -->
+                        <button class="carousel-btn carousel-btn-prev" aria-label="Previous benefit">‹</button>
+                        <button class="carousel-btn carousel-btn-next" aria-label="Next benefit">›</button>
+                        
+                        <!-- Dots indicator -->
+                        <div class="carousel-dots">
+                            <button class="carousel-dot active" data-slide="0"></button>
+                            <button class="carousel-dot" data-slide="1"></button>
+                            <button class="carousel-dot" data-slide="2"></button>
+                        </div>
                     </div>
+                   
+                </div>
 
-                    <h3>Inter-Annotator Agreement</h3>
-                    <p>We achieve reliable inter-annotator agreement across all framework components:</p>
-                    <ul>
-                        <li><strong>Characters:</strong> Krippendorff α of 0.76 (Hero), 0.67 (Villain), 0.81 (Victim)</li>
-                        <li><strong>Focus:</strong> Krippendorff α of 0.78</li>
-                        <li><strong>Conflict:</strong> Krippendorff α of 0.82</li>
-                        <li><strong>Cultural Story:</strong> Krippendorff α of 0.80</li>
-                    </ul>
 
-                    <h3>Political Leaning Analysis</h3>
-                    <p>Narrative components strongly associate with political leanings:</p>
-                    <ul>
-                        <li><strong>Right-bias outlets:</strong> Predominantly frame as "preventing resolution" with individualistic cultural stories</li>
-                        <li><strong>Left-bias outlets:</strong> More diverse narrative components, rarely use individualistic framing</li>
-                        <li><strong>Structured annotation:</strong> 63% agreement vs 37% for direct narrative labeling</li>
-                    </ul>
 
-                    <h3>COVID-19 Cross-Domain Results</h3>
-                    <p>Our framework successfully generalizes to political speeches:</p>
-                    <ul>
-                        <li><strong>Merkel (Germany):</strong> Egalitarian cultural stories, emphasizing collective action</li>
-                        <li><strong>Morrison (Australia):</strong> Hierarchical stories, government-centered solutions</li>
-                        <li><strong>Johnson (UK):</strong> Mixed approach including individualistic elements</li>
-                    </ul>
+                <div class="section-content">
+                    <h3>Another country, another time</h3>
+                    <p>The beauty of our framework is that it can generalize across topics and context. In particular, it allows to discover new narrative frames which were previously not included in the framework, rather than force them into one of the pre-existing "bucket".</p>
+                    <p>To demonstrate that, we additionally annotate climate-focused articles from Australian outlets published in 2024, with a similar distribution across left-centred, left and right-centered sources.</p>
+                    <p>As the picture below shows, we are able not only to compare the relative frequency of the narrative frames included in the USA dataset in Australian media, but also to discover new combinations of frame componets.</p>
+                    
+                    <div class="comparison-image-container">
+                        <img src="images/comparison.png" alt="Comparison of narrative frame components between USA and Australian media outlets" class="comparison-diagram">
+                    </div>
                 </div>
             </section>
+
+            
 
             <!-- Conclusion -->
             <section id="conclusion" class="section">
@@ -440,12 +514,6 @@
                 <div class="section-content">
                     <div class="resources-grid">
                         <div class="resource-card">
-                            <div class="resource-icon">🎯</div>
-                            <h3>Interactive Example</h3>
-                            <p>Explore narrative framing with hover tooltips and real examples</p>
-                            <a href="interactive-example.html" class="btn btn-outline">Try Interactive Demo</a>
-                        </div>
-                        <div class="resource-card">
                             <div class="resource-icon">🤖</div>
                             <h3>Model Demo</h3>
                             <p>Test our narrative framing model with your own articles</p>
@@ -458,28 +526,10 @@
                             <a href="#" class="btn btn-outline">Download PDF</a>
                         </div>
                         <div class="resource-card">
-                            <div class="resource-icon">�</div>
-                            <h3>Code</h3>
-                            <p>Complete implementation in PyTorch with training scripts</p>
-                            <a href="#" class="btn btn-outline">GitHub Repository</a>
-                        </div>
-                        <div class="resource-card">
                             <div class="resource-icon">�📊</div>
                             <h3>Dataset</h3>
-                            <p>Preprocessed datasets and evaluation protocols</p>
+                            <p>Annotated datasets</p>
                             <a href="#" class="btn btn-outline">Download Data</a>
-                        </div>
-                        <div class="resource-card">
-                            <div class="resource-icon">🎯</div>
-                            <h3>Models</h3>
-                            <p>Pre-trained models and checkpoints</p>
-                            <a href="#" class="btn btn-outline">Model Hub</a>
-                        </div>
-                        <div class="resource-card">
-                            <div class="resource-icon">📋</div>
-                            <h3>Supplementary</h3>
-                            <p>Additional experiments and detailed analysis</p>
-                            <a href="#" class="btn btn-outline">Supplementary Material</a>
                         </div>
                         <div class="resource-card">
                             <div class="resource-icon">🎥</div>
@@ -514,7 +564,6 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Narrative Framing Research Team. All rights reserved.</p>
             <p>For questions or collaborations, contact: <a href="mailto:y.otmakhova@unimelb.edu.au">y.otmakhova@unimelb.edu.au</a> or <a href="mailto:l.frermann@unimelb.edu.au">l.frermann@unimelb.edu.au</a></p>
         </div>
     </footer>
