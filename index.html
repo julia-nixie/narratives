@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Narrative Media Framing in Political Discourse</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dynamic-chart-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -15,13 +17,11 @@
             <div class="nav-logo">Narrative Framing</div>
             <ul class="nav-menu">
                 <li><a href="#introduction" class="nav-link">Introduction</a></li>
-                <li><a href="#method" class="nav-link">Method</a></li>
-                <li><a href="#comparisons" class="nav-link">Comparisons</a></li>
+                <li><a href="method.html" class="nav-link">Narrative components</a></li>
+                <li><a href="#example" class="nav-link">Interactive example</a></li>
                 <li><a href="#demo" class="nav-link">Demo</a></li>
-                <li><a href="#experiments" class="nav-link">Experiments</a></li>
-                <li><a href="#results" class="nav-link">Results</a></li>
-                <li><a href="#conclusion" class="nav-link">Conclusion</a></li>
-                <li><a href="#resources" class="nav-link">Resources</a></li>
+                <li><a href="experiments.html" class="nav-link">Experiments</a></li>
+                <li><a href="#comparison" class="nav-link">USA vs Australian narratives</a></li>
             </ul>
         </div>
     </nav>
@@ -67,53 +67,31 @@
                         <li><strong>Cultural stories</strong> link to broader value systems, allowing the frames to evoke wider associations existing in the culture.</li>
                     </ul>
 
-                    <p>Let's take a deeper look at these components and see how they allow to uniquely represent narrative frames and distinguish between them.</p>
+                    <p>More details about these components can be found in our <a href="method.html" style="color: var(--primary-purple); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--primary-purple); transition: var(--transition);" onmouseover="this.style.color='var(--primary-teal)'; this.style.borderBottomColor='var(--primary-teal)'" onmouseout="this.style.color='var(--primary-purple)'; this.style.borderBottomColor='var(--primary-purple)'">method section</a> and in our <a href="https://arxiv.org/pdf/2506.00737" style="color: var(--primary-purple); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--primary-purple); transition: var(--transition);" onmouseover="this.style.color='var(--primary-teal)'; this.style.borderBottomColor='var(--primary-teal)'" onmouseout="this.style.color='var(--primary-purple)'; this.style.borderBottomColor='var(--primary-purple)'">paper</a>. The benefits of the structural approach to narratives are summarised <a href="experiments.html" style="color: var(--primary-purple); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--primary-purple); transition: var(--transition);" onmouseover="this.style.color='var(--primary-teal)'; this.style.borderBottomColor='var(--primary-teal)'" onmouseout="this.style.color='var(--primary-purple)'; this.style.borderBottomColor='var(--primary-purple)'">here</a>.</p>
+                    <p>On this page we present several additions to our paper: </p>
+                    <ul>
+                        <li>An interactive example of how narrative components are used to frame the text.</li>
+                        <li>A live demo of the model.</li>
+                        <li>A comparison of climate change narratives in the USA and Australia.</li>
+                    </ul>
+
                 </div>
             </section>
 
-            <!-- Method -->
-            <section id="method" class="section">
-                <h2 class="section-title">Components of Narrative Framing</h2>
+            <!-- Interactive Example -->
+            <section id="example" class="section">
+                <h2 class="section-title">Interactive Example: Are melting icebergs actually good for us?</h2>
                 <div class="section-content">
-        
-                    <h3>Characters</h3>
-                    <p>Characters and their prototypical roles follow the simplified <strong>hero, villain, and victim (HVV)</strong> triad from the Narrative Policy Framework. By assigning entities to particular roles, we resolve issue ambivalence by conveying moral judgment. The framework distinguishes between main characters and other entities, using the <strong>single most central character</strong> fulfilling each role.</p>
+                    <p class="example-description">Hover over the highlighted text below to explore how narrative framing components work in practice:</p>
                     
-                    <p>To differentiate narratives, we also identify the <strong>focus</strong> on either hero, villain, or victim, resulting in "heroic", "blaming", and "victimizing" narrative frames respectively.</p>
-
-                    <h3>Conflict and Resolution</h3>
-                    <p>This component encapsulates the "plot" element and links to framing criteria that point to causes and resolutions. We conceptualize this as a four-way distinction where characters can:</p>
-                    <ul>
-                        <li><strong>Fuel Conflict:</strong> Perform actions that cause or exacerbate the issue</li>
-                        <li><strong>Fuel Resolution:</strong> Perform actions that help resolve the issue</li>
-                        <li><strong>Prevent Conflict:</strong> Oppose actions that cause or exacerbate the issue</li>
-                        <li><strong>Prevent Resolution:</strong> Oppose actions that help resolve the issue</li>
-                    </ul>
-
-                    <h3>Cultural Stories</h3>
-                    <p>Cultural stories map narrative combinations to four larger interpretation schemata, defining the degree of external control and group belonging:</p>
-                    <div class="formula">
-                        <ul>
-                            <li><strong>Fatalist:</strong> People at mercy of external forces (natural disasters, fate)</li>
-                            <li><strong>Hierarchical:</strong> Bound by social prescriptions and external control (government)</li>
-                            <li><strong>Individualistic:</strong> Loose social ties, rejecting external control</li>
-                            <li><strong>Egalitarian:</strong> Collective action, opposing external control</li>
-                        </ul>
-                    </div>
-
-                    <!-- Interactive Example -->
                     <div class="interactive-example-container">
-                        <h3>Interactive Example: Are melting icebergs actually good for us?</h3>
-                        <p class="example-description">Hover over the highlighted text below to explore how narrative framing components work in practice:</p>
-                        
-
                         <div class="example-article">
                             <div class="example-title">Global warming fail: Study finds melting sea ice is actually helping Arctic animals</div>
-                            
+                                
                             <p><span class="villain" data-tooltip="villain">Proponents of the theory humans are primarily responsible for rising global temperatures</span> long claimed wildlife are harmed significantly by global warming, and that unless mankind stops producing significant amounts of carbon-dioxide emissions, the world's animals will not be able to thrive.</p>
-                            
+                                
                             <p>While rising temperatures have certainly put a strain on species in some parts of the world, <span class="hero focus" data-tooltip="hero-focus">a new study by researchers at the University of Southern Denmark</span> suggests <span class="cultural-story" data-tooltip="cultural-story">animals in the Arctic region are thriving because of higher global temperatures</span>.</p>
-                            
+                                
                             <p><span class="villain" data-tooltip="villain-media">USA Today recently declared the loss of sea ice "terrifying,"</span> but <span class="hero conflict" data-tooltip="hero-conflict">global warming skeptics have long suggested these claims are overblown when put into perspective</span>.</p>
                         </div>
                         <p>Overall, this structure points to a denialist narrative frame ``No need to act'' which questions or ridicules the reality of climate change.</p>
@@ -121,147 +99,6 @@
                 </div>
             </section>
 
-            <!-- Narrative Comparison Examples -->
-            <section id="comparisons" class="section">
-                <h2 class="section-title">Distinguishing Similar Narratives</h2>
-                <div class="section-content">
-                    <p>Understanding how subtle differences in narrative framing can completely change the interpretation of similar events is crucial. Scroll through these examples to see how changes in a narrative frame structure lead to contrasting ways of framing.</p>
-                    
-                    <div class="comparison-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-track">
-                                <!-- Example 1: Hero vs Villain -->
-                                <div class="comparison-slide">
-                                    <h3 class="comparison-title">Is Pope Francis the hero or the villain?</h3>
-                                    <div class="comparison-content">
-                                        <div class="article-column">
-                                            <h4>Villain</h4>
-                                            <div class="article-text">
-                                                <p>In his Message for the World Day of Prayer for the Care of Creation, the pope adopted the apocalyptic language encouraged by climate alarmists to frighten people into taking action. "Too many of us act like tyrants with regard to creation," he declared . "Let us make an effort to change and to adopt more simple and respectful lifestyles! "… The pope has apparently joined the climate alarmists in employing more incendiary language, dropping his former references to climate change to speak of a "climate emergency" and an "environmental crisis" in Sunday's message..."</p>
-                                            </div>
-                                        </div>
-                                        <div class="vs-divider">VS</div>
-                                        <div class="article-column">
-                                            <h4>Hero</h4>
-                                            <div class="article-text">
-                                                <p>Pope Francis told a group of lawyers that he could like to introduce the category of "ecological sin" into official Catholic teaching. "We must introduce – we are thinking about it – in the Catechism of the Catholic Church the sin against ecology, the ecological sin against the common home, because it is a duty," the pope said Friday in addressing participants in an international conference on penal law. More specifically, Francis said, are all those actions that can be considered as "ecocide," for instance, "the massive contamination of air, land and water resources...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="comparison-explanation">
-                                        Both articles talk about the same person, have the same topic and similar events. However, the article on the left frames Pope Francis as a villain for "frightening people" and represents a denialist narrative "Debate and scam", while the article on the right frames him as a hero who proposes specific changes to mitigate climate crisis ("Officials declare a climate emergency").
-                                    </div>
-                                </div>
-
-                                <!-- Example 2: Focus Shift -->
-                                <div class="comparison-slide">
-                                    <h3 class="comparison-title">What do we focus on?</h3>
-                                    <div class="comparison-content">
-                                        <div class="article-column">
-                                            <h4>Victim-Focused</h4>
-                                            <div class="article-text">
-                                                <p><strong>Small island nations</strong> face an existential threat as rising sea levels threaten to submerge entire communities. These <strong>vulnerable populations</strong> have contributed least to climate change yet suffer its worst consequences, losing their ancestral homes and cultural heritage.</p>
-                                            </div>
-                                        </div>
-                                        <div class="vs-divider">VS</div>
-                                        <div class="article-column">
-                                            <h4>Hero-Focused</h4>
-                                            <div class="article-text">
-                                                <p><strong>International climate scientists</strong> have developed innovative solutions to help island nations adapt to rising seas. These <strong>dedicated researchers</strong> work tirelessly to create floating cities and advanced sea walls, offering hope through technological innovation.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="comparison-explanation">
-                                        <strong>Key Difference:</strong> The first article focuses on victims (island nations) to evoke sympathy, while the second focuses on heroes (scientists) to inspire confidence in solutions.
-                                    </div>
-                                </div>
-
-                                <!-- Example 3: Cultural Stories -->
-                                <div class="comparison-slide">
-                                    <h3 class="comparison-title">Individual vs. collective responsibility</h3>
-                                    <div class="comparison-content">
-                                        <div class="article-column">
-                                            <h4>Individualistic Frame</h4>
-                                            <div class="article-text">
-                                                <p>Climate change can be solved through <strong>personal choices</strong> and market innovation. <strong>Conscious consumers</strong> drive demand for green products, while <strong>entrepreneurs</strong> develop clean technologies. Government interference only slows down these natural market solutions.</p>
-                                            </div>
-                                        </div>
-                                        <div class="vs-divider">VS</div>
-                                        <div class="article-column">
-                                            <h4>Egalitarian Frame</h4>
-                                            <div class="article-text">
-                                                <p>Climate change requires <strong>collective action</strong> and systemic change. <strong>Communities</strong> must work together to pressure governments and corporations. Only through <strong>coordinated global efforts</strong> can we address this crisis that affects everyone equally.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="comparison-explanation">
-                                        <strong>Key Difference:</strong> The individualistic frame emphasizes personal responsibility and market solutions, while the egalitarian frame stresses collective action and systemic change.
-                                    </div>
-                                </div>
-
-                                <!-- Example 4: Conflict Type -->
-                                <div class="comparison-slide">
-                                    <h3 class="comparison-title">Fueling conflict vs. preventing resolution</h3>
-                                    <div class="comparison-content">
-                                        <div class="article-column">
-                                            <h4>Fueling Conflict</h4>
-                                            <div class="article-text">
-                                                <p><strong>Fossil fuel companies</strong> continue to expand drilling operations despite climate warnings. These <strong>corporate polluters</strong> prioritize short-term profits over planetary health, accelerating the climate crisis through their reckless pursuit of oil and gas.</p>
-                                            </div>
-                                        </div>
-                                        <div class="vs-divider">VS</div>
-                                        <div class="article-column">
-                                            <h4>Preventing Resolution</h4>
-                                            <div class="article-text">
-                                                <p><strong>Environmental extremists</strong> block essential energy infrastructure projects needed for economic stability. These <strong>radical protesters</strong> prevent the development of cleaner energy alternatives by opposing all industrial development, hindering progress toward practical solutions.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="comparison-explanation">
-                                        <strong>Key Difference:</strong> The first frames fossil fuel companies as actively worsening the problem, while the second frames environmental groups as preventing solutions from being implemented.
-                                    </div>
-                                </div>
-
-                                <!-- Example 5: Victim Assignment -->
-                                <div class="comparison-slide">
-                                    <h3 class="comparison-title">Who are the real victims?</h3>
-                                    <div class="comparison-content">
-                                        <div class="article-column">
-                                            <h4>Environmental Victims</h4>
-                                            <div class="article-text">
-                                                <p><strong>Wildlife populations</strong> are collapsing due to habitat destruction and pollution. <strong>Endangered species</strong> face extinction while <strong>ecosystems</strong> that took millennia to develop are destroyed in decades by industrial expansion and climate change.</p>
-                                            </div>
-                                        </div>
-                                        <div class="vs-divider">VS</div>
-                                        <div class="article-column">
-                                            <h4>Economic Victims</h4>
-                                            <div class="article-text">
-                                                <p><strong>Working families</strong> lose their livelihoods as environmental regulations shut down industries. <strong>Rural communities</strong> that depend on mining and logging face economic devastation, while <strong>blue-collar workers</strong> struggle to find alternative employment.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="comparison-explanation">
-                                        <strong>Key Difference:</strong> One narrative positions nature as the victim of human activity, while the other positions workers as victims of environmental policies.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Navigation arrows -->
-                        <button class="carousel-btn carousel-btn-prev" aria-label="Previous example">‹</button>
-                        <button class="carousel-btn carousel-btn-next" aria-label="Next example">›</button>
-                        
-                        <!-- Dots indicator -->
-                        <div class="carousel-dots">
-                            <button class="carousel-dot active" data-slide="0"></button>
-                            <button class="carousel-dot" data-slide="1"></button>
-                            <button class="carousel-dot" data-slide="2"></button>
-                            <button class="carousel-dot" data-slide="3"></button>
-                            <button class="carousel-dot" data-slide="4"></button>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             <!-- Model Demo -->
             <section id="demo" class="section">
@@ -375,141 +212,71 @@
                 </div>
             </section>
 
-            <!-- Experiments -->
-            <section id="experiments" class="section">
-                <h2 class="section-title">Experiments and analysis</h2>
-                <div class="section-content">
-                    <h3>On benefits of compositionality</h3>
-                    <p>To apply our framework, we rigorously annotate a dataset of climate-related articles published in the USA in 2017-2019, conduct extensive experiments with LLMs, and analyse the results in the context of political leanings. Please refer to our <a href="https://arxiv.org/pdf/2506.00737" style="color: var(--primary-purple); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--primary-purple); transition: var(--transition);" onmouseover="this.style.color='var(--primary-teal)'; this.style.borderBottomColor='var(--primary-teal)'" onmouseout="this.style.color='var(--primary-purple)'; this.style.borderBottomColor='var(--primary-purple)'">paper</a> for details.</p>
-                    <p>Notably, the component-focused approach to narrative frames demonstrates benefits in all these aspects:</p>
-                    
-                    <div class="benefits-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-track">
-                                <!-- Slide 1: Bar Chart -->
-                                <div class="benefits-slide">
-                                    <div class="slide-content">
-                                        <div class="chart-container">
-                                            <h4>Inter-Annotator Agreement Improvement</h4>
-                                            <div class="chart-layout">
-                                                <div class="vertical-bar-chart">
-                                                    <div class="chart-bars">
-                                                        <div class="vertical-bar-item">
-                                                            <div class="vertical-bar-wrapper">
-                                                                <div class="vertical-bar vertical-bar-low" style="height: 37%;">
-                                                                    <span class="vertical-bar-value">37%</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="vertical-bar-label">Direct Narrative Labeling</div>
-                                                        </div>
-                                                        <div class="vertical-bar-item">
-                                                            <div class="vertical-bar-wrapper">
-                                                                <div class="vertical-bar vertical-bar-high" style="height: 63%;">
-                                                                    <span class="vertical-bar-value">63%</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="vertical-bar-label">Labeling by Narrative Components</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="chart-commentary">
-                            
-                                                    <p>Narrative frame components can be reliably annotated, achieving Krippendorff α in the range of 0.67-0.82.</p>
-                                                    <p>Deriving the resulting narrative frame label from component annotations results in a much higher agreement than predicting the narrative frame directly (63% vs 37%).</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Slide 2: Framework Structure -->
-                                <div class="benefits-slide">
-                                    <div class="slide-content">
-                                        <h4>Improved Model Performance</h4>
-                                        <div class="benefit-layout">
-                                            <div class="benefit-description">
-                                                <p>While regular LLM tricks like few-shot learning, PEFT and reasoning do not help to improve narrative prediction, including their structural components - even when predicted by the model rather than provided - does.</p>
-                                            </div>
-                                            <div class="benefit-image">
-                                                <img src="images/struct.jpg" alt="Framework Structure Diagram" class="framework-diagram">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 3: Political Leaning Analysis -->
-                                <div class="benefits-slide">
-                                    <div class="slide-content">
-                                        <h4>Political Leaning Analysis</h4>
-                                        <div class="full-width-images">
-                                            <div class="dual-image-container">
-                                                <div class="dual-image-item">
-                                                    <img src="images/narr_leaning.jpg" alt="Narrative Political Leaning Analysis" class="framework-diagram">
-                                                </div>
-                                                <div class="dual-image-item">
-                                                    <img src="images/story_conflict.jpg" alt="Story Conflict Analysis" class="framework-diagram">
-                                                </div>
-                                            </div>
-                                            <div class="bottom-comments">
-                                                <div class="single-comment">While there are some trends in narrative frames used by left-bias and right-bias sources, the paterns become more prominent when we look at the components that underly them. For instance, as the picture on the right shows, right-leaning outlets favor individualistic narratives with "preventing resolution" framing, while left-leaning outlets emphasize collective action.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Navigation arrows -->
-                        <button class="carousel-btn carousel-btn-prev" aria-label="Previous benefit">‹</button>
-                        <button class="carousel-btn carousel-btn-next" aria-label="Next benefit">›</button>
-                        
-                        <!-- Dots indicator -->
-                        <div class="carousel-dots">
-                            <button class="carousel-dot active" data-slide="0"></button>
-                            <button class="carousel-dot" data-slide="1"></button>
-                            <button class="carousel-dot" data-slide="2"></button>
-                        </div>
-                    </div>
-                   
-                </div>
-
-
-
+            <section id="comparison" class="section">
+                <h2 class="section-title">USA vs Australian Narratives</h2>
                 <div class="section-content">
                     <h3>Another country, another time</h3>
                     <p>The beauty of our framework is that it can generalize across topics and context. In particular, it allows to discover new narrative frames which were previously not included in the framework, rather than force them into one of the pre-existing "bucket".</p>
                     <p>To demonstrate that, we additionally annotate climate-focused articles from Australian outlets published in 2024, with a similar distribution across left-centred, left and right-centered sources.</p>
                     <p>As the picture below shows, we are able not only to compare the relative frequency of the narrative frames included in the USA dataset in Australian media, but also to discover new combinations of frame componets.</p>
+                    <p>Specifically, we discover two new narratives of denial and delay ("Adaption" and "Fossil fuel solutionism" <a href="https://www.cambridge.org/core/journals/global-sustainability/article/discourses-of-climate-delay/7B11B722E3E3454BB6212378E32985A7" style="color: var(--primary-purple); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--primary-purple); transition: var(--transition);" onmouseover="this.style.color='var(--primary-teal)'; this.style.borderBottomColor='var(--primary-teal)'" onmouseout="this.style.color='var(--primary-purple)'; this.style.borderBottomColor='var(--primary-purple)'">[Lamb et al., 2020]</a>), as well as two pro-climate narratives ("Pollution is choking our planet" <a href="https://www.sciencedirect.com/science/article/abs/pii/S2214629620301560" style="color: var(--primary-purple); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--primary-purple); transition: var(--transition);" onmouseover="this.style.color='var(--primary-teal)'; this.style.borderBottomColor='var(--primary-teal)'" onmouseout="this.style.color='var(--primary-purple)'; this.style.borderBottomColor='var(--primary-purple)'">[Bevan et al., 2020]</a> and "Win-win scenario" <a href="https://link.springer.com/article/10.1007/s10584-020-02761-y" style="color: var(--primary-purple); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--primary-purple); transition: var(--transition);" onmouseover="this.style.color='var(--primary-teal)'; this.style.borderBottomColor='var(--primary-teal)'" onmouseout="this.style.color='var(--primary-purple)'; this.style.borderBottomColor='var(--primary-purple)'">[Hinkel et al., 2020]</a>).</p>
+                    <p>We also note that narratives of denial and delay, especially the once criticisng climate solutions and suggesting "better" fossil fuels and technological solutions, are much more present in Australian media, which confirms previous findings <a href="https://www.sciencedirect.com/science/article/abs/pii/S2214629622001748" style="color: var(--primary-purple); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--primary-purple); transition: var(--transition);" onmouseover="this.style.color='var(--primary-teal)'; this.style.borderBottomColor='var(--primary-teal)'" onmouseout="this.style.color='var(--primary-purple)'; this.style.borderBottomColor='var(--primary-purple)'">[Arranz et al., 2024]</a></p>
                     
-                    <div class="comparison-image-container">
-                        <img src="images/comparison.png" alt="Comparison of narrative frame components between USA and Australian media outlets" class="comparison-diagram">
+                    <div class="comparison-chart-container">
+                        <div class="chart-controls">
+                            <h4>Distribution of Climate Narratives: USA vs Australia</h4>
+                            <div class="chart-options">
+                                <label>
+                                    <input type="radio" name="sort" value="usa" checked> Sort by USA %
+                                </label>
+                                <label>
+                                    <input type="radio" name="sort" value="australia"> Sort by Australia %
+                                </label>
+                                <label>
+                                    <input type="radio" name="sort" value="difference"> Sort by Difference
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Dynamic chart container -->
+                        <div id="dynamic-comparison-chart" class="dynamic-chart"></div>
+                        
+                        <!-- Loading indicator -->
+                        <div id="chart-loading" class="chart-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading chart data...</p>
+                        </div>
+                        
+                        <!-- Narrative popup modal -->
+                        <div id="narrative-modal" class="narrative-modal">
+                            <div class="narrative-modal-content">
+                                <span class="narrative-modal-close">&times;</span>
+                                <h3 id="narrative-title"></h3>
+                                <div class="narrative-structure">
+                                    <h4>Structure:</h4>
+                                    <div id="narrative-structure-content"></div>
+                                </div>
+                                <div class="narrative-description">
+                                    <h4>Description:</h4>
+                                    <p id="narrative-description-content"></p>
+                                </div>
+                                <div class="narrative-source">
+                                    <h4>Source:</h4>
+                                    <p id="narrative-source-content"></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             
 
-            <!-- Conclusion -->
-            <section id="conclusion" class="section">
-                <h2 class="section-title">Conclusion</h2>
-                <div class="section-content">
-                    <p>We have presented a rigorous formalization and taxonomy of components of narrative framing, synthesizing the Narrative Policy Framework with Entman's components of a frame. Our method allows inductive detection of narratives from political texts in terms of their character roles, focus, conflict, and underlying cultural story. Our key contributions include:</p>
-                    
-                    <ol>
-                        <li><strong>Theoretical Framework:</strong> A comprehensive formalization connecting elements of narrativity with fundamental aspects of framing</li>
-                        <li><strong>Empirical Dataset:</strong> A high-quality annotated dataset of 100 climate change articles with reliable inter-annotator agreement</li>
-                        <li><strong>LLM Evaluation:</strong> Systematic testing of multiple LLMs on narrative frame prediction tasks, revealing current limitations</li>
-                        <li><strong>Cross-Domain Validation:</strong> Demonstration of framework generalizability from climate change to COVID-19 political discourse</li>
-                    </ol>
-
-                    <p>Our framework results in promising improvements for automatic narrative prediction with LLMs and lays a foundation for large-scale studies of narrative frame manifestation and effects. The structured approach to annotation achieves substantially higher agreement (63% vs 37%) compared to direct narrative labeling.</p>
-
-                    <p>This work opens important research directions for computational analysis of narrative framing in political discourse, providing tools for understanding how complex issues are communicated and perceived across different political contexts.</p>
-                </div>
-            </section>
+        
 
             <!-- Resources -->
-            <section id="resources" class="section">
+            <!-- <section id="resources" class="section">
                 <h2 class="section-title">Resources</h2>
                 <div class="section-content">
                     <div class="resources-grid">
@@ -526,7 +293,7 @@
                             <a href="#" class="btn btn-outline">Download PDF</a>
                         </div>
                         <div class="resource-card">
-                            <div class="resource-icon">�📊</div>
+                            <div class="resource-icon">📊</div>
                             <h3>Dataset</h3>
                             <p>Annotated datasets</p>
                             <a href="#" class="btn btn-outline">Download Data</a>
@@ -539,7 +306,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
 
             <!-- Citation -->
             <section id="citation" class="section">
@@ -547,13 +314,11 @@
                 <div class="section-content">
                     <p>If you find our work useful, please cite our paper:</p>
                     <div class="citation-box">
-                        <pre id="bibtex-citation">@article{otmakhova2024narrative,
-  title={Narrative Media Framing in Political Discourse},
-  author={Otmakhova, Yulia and Frermann, Lea},
-  journal={arXiv preprint},
-  year={2024},
-  institution={School of Computing and Information Systems, The University of Melbourne}
-}</pre>
+                        <pre id="bibtex-citation">@article{otmakhova2025narrative,
+        title={Narrative Media Framing in Political Discourse},
+        author={Otmakhova, Yulia and Frermann, Lea},
+        journal={arXiv preprint arXiv:2506.00737},
+        year={2025} }</pre>
                         <button class="copy-btn" onclick="copyBibtex()">📋 Copy BibTeX</button>
                     </div>
                 </div>
@@ -572,5 +337,271 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
     <script src="script.js"></script>
     <script src="demo-script.js"></script>
+    
+    <!-- Dynamic Chart Script -->
+    <script>
+    // Pre-define narrative mappings for performance
+    const NARRATIVE_MAPPING = {
+        'POLLUTION_IS_CHOKING': 'Pollution is choking our planet',
+        'WIN_WIN': 'Win-win scenario',
+        'FOSSIL_FUEL_SOLUTIOINISM': 'Fossil fuel solutionism',
+        'ADAPTATION': 'Doomism',
+        'NO_STICKS': 'No sticks just carrots',
+        'EVERY_LITTLE_HELPS': 'Every little helps',
+        'VICTIM_BLAMING': 'Victim blaming',
+        'COLLAPSE_IS_IMMINENT': 'The collapse is imminent',
+        'OTHERS_ARE_WORSE': 'Others are worse than us',
+        'CARBON_EXPANSION': 'Carbon fueled expansion',
+        'TECHNOLOGICAL_OPTIMISM': 'Technological optimism',
+        'ENDANGERED_SPECIES': 'Endangered species',
+        'ALL_TALK': 'All talk little action',
+        'CLIMATE_SOLUTIONS_WONT_WORK': "Climate solutions won't work",
+        'NO_NEED_TO_ACT': 'No need to act',
+        'GORE': 'Al Gore',
+        'ALL_GOING_TO_DIE': 'We are all going to die',
+        'OFFICIALS_DECLARE_EMERGENCY': 'Officials declare climate emergency',
+        'DEBATE_AND_SCAM': 'Debate and scam',
+        'YOURE_DESTROYING_OUR_FUTURE': "You're destroying our future",
+        '12_YEARS': '12 Years to Save the World'
+    };
+
+
+    // Override the dynamic chart function with embedded data
+    function initializeDynamicComparisonChart() {
+        // Embedded data to avoid CORS issues
+        const data = [
+            {Narrative: "POLLUTION_IS_CHOKING", USA_Percentage_num: 0.0, Australia_Percentage_num: 2.0, Difference: -2.0},
+            {Narrative: "WIN_WIN", USA_Percentage_num: 0.0, Australia_Percentage_num: 7.0, Difference: -7.0},
+            {Narrative: "FOSSIL_FUEL_SOLUTIOINISM", USA_Percentage_num: 0.0, Australia_Percentage_num: 10.0, Difference: -10.0},
+            {Narrative: "ADAPTATION", USA_Percentage_num: 0.0, Australia_Percentage_num: 1.0, Difference: -1.0},
+            {Narrative: "NO_STICKS", USA_Percentage_num: 1.0, Australia_Percentage_num: 4.0, Difference: -3.0},
+            {Narrative: "EVERY_LITTLE_HELPS", USA_Percentage_num: 1.0, Australia_Percentage_num: 2.0, Difference: -1.0},
+            {Narrative: "VICTIM_BLAMING", USA_Percentage_num: 1.0, Australia_Percentage_num: 0.0, Difference: 1.0},
+            {Narrative: "COLLAPSE_IS_IMMINENT", USA_Percentage_num: 2.0, Australia_Percentage_num: 0.0, Difference: 2.0},
+            {Narrative: "OTHERS_ARE_WORSE", USA_Percentage_num: 2.0, Australia_Percentage_num: 1.0, Difference: 1.0},
+            {Narrative: "CARBON_EXPANSION", USA_Percentage_num: 3.0, Australia_Percentage_num: 4.0, Difference: -1.0},
+            {Narrative: "TECHNOLOGICAL_OPTIMISM", USA_Percentage_num: 3.0, Australia_Percentage_num: 5.0, Difference: -2.0},
+            {Narrative: "ENDANGERED_SPECIES", USA_Percentage_num: 3.0, Australia_Percentage_num: 3.0, Difference: 0.0},
+            {Narrative: "ALL_TALK", USA_Percentage_num: 3.0, Australia_Percentage_num: 0.0, Difference: 3.0},
+            {Narrative: "CLIMATE_SOLUTIONS_WONT_WORK", USA_Percentage_num: 5.0, Australia_Percentage_num: 15.0, Difference: -10.0},
+            {Narrative: "NO_NEED_TO_ACT", USA_Percentage_num: 6.0, Australia_Percentage_num: 2.0, Difference: 4.0},
+            {Narrative: "GORE", USA_Percentage_num: 6.0, Australia_Percentage_num: 0.0, Difference: 6.0},
+            {Narrative: "ALL_GOING_TO_DIE", USA_Percentage_num: 7.0, Australia_Percentage_num: 3.0, Difference: 4.0},
+            {Narrative: "OFFICIALS_DECLARE_EMERGENCY", USA_Percentage_num: 10.0, Australia_Percentage_num: 6.0, Difference: 4.0},
+            {Narrative: "DEBATE_AND_SCAM", USA_Percentage_num: 11.0, Australia_Percentage_num: 23.0, Difference: -12.0},
+            {Narrative: "YOURE_DESTROYING_OUR_FUTURE", USA_Percentage_num: 14.0, Australia_Percentage_num: 3.0, Difference: 11.0},
+            {Narrative: "12_YEARS", USA_Percentage_num: 22.0, Australia_Percentage_num: 9.0, Difference: 13.0}
+        ];
+
+        // Hide loading indicator
+        const loadingElement = document.getElementById('chart-loading');
+        if (loadingElement) {
+            loadingElement.style.display = 'none';
+        }
+
+        // Create initial chart
+        createComparisonChart(data, 'usa');
+
+        // Add event listeners for sorting options
+        const sortOptions = document.querySelectorAll('input[name="sort"]');
+        sortOptions.forEach(option => {
+            option.addEventListener('change', function() {
+                if (this.checked) {
+                    createComparisonChart(data, this.value);
+                }
+            });
+        });
+    }
+
+    function createComparisonChart(data, sortBy) {
+        // Sort data based on selected option (in descending order)
+        let sortedData = [...data];
+        switch(sortBy) {
+            case 'usa':
+                sortedData.sort((a, b) => b.USA_Percentage_num - a.USA_Percentage_num);
+                break;
+            case 'australia':
+                sortedData.sort((a, b) => b.Australia_Percentage_num - a.Australia_Percentage_num);
+                break;
+            case 'difference':
+                sortedData.sort((a, b) => b.Difference - a.Difference);
+                break;
+        }
+
+        // Clear existing chart
+        d3.select('#dynamic-comparison-chart').selectAll('*').remove();
+
+        // Set dimensions and margins
+        const margin = {top: 40, right: 120, bottom: 100, left: 250};
+        const width = 900 - margin.left - margin.right;
+        const height = Math.max(800, sortedData.length * 40) - margin.top - margin.bottom;
+
+        // Create SVG
+        const svg = d3.select('#dynamic-comparison-chart')
+            .append('svg')
+            .attr('class', 'chart-svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom);
+
+        const g = svg.append('g')
+            .attr('transform', `translate(${margin.left},${margin.top})`);
+
+        // Create scales
+        const xScale = d3.scaleLinear()
+            .domain([0, d3.max(sortedData, d => Math.max(d.USA_Percentage_num, d.Australia_Percentage_num))])
+            .range([0, width]);
+
+        const yScale = d3.scaleBand()
+            .domain(sortedData.map(d => d.Narrative))
+            .range([0, height])
+            .padding(0.1);
+
+        // Create axes with larger font
+        const xAxis = d3.axisBottom(xScale).ticks(10).tickFormat(d => d + '%');
+        const yAxis = d3.axisLeft(yScale).tickFormat(d => {
+            const narrativeMapping = {
+                'POLLUTION_IS_CHOKING': 'Pollution is choking our planet',
+                'WIN_WIN': 'Win-win scenario',
+                'FOSSIL_FUEL_SOLUTIOINISM': 'Fossil fuel solutionism',
+                'ADAPTATION': 'Adaptation',
+                'NO_STICKS': 'No sticks just carrots',
+                'EVERY_LITTLE_HELPS': 'Every little helps',
+                'VICTIM_BLAMING': 'Victim blaming',
+                'COLLAPSE_IS_IMMINENT': 'The collapse is imminent',
+                'OTHERS_ARE_WORSE': 'Others are worse than us',
+                'CARBON_EXPANSION': 'Carbon fueled expansion',
+                'TECHNOLOGICAL_OPTIMISM': 'Technological optimism',
+                'ENDANGERED_SPECIES': 'Endangered species',
+                'ALL_TALK': 'All talk little action',
+                'CLIMATE_SOLUTIONS_WONT_WORK': "Climate solutions won't work",
+                'NO_NEED_TO_ACT': 'No need to act',
+                'GORE': 'Gore',
+                'ALL_GOING_TO_DIE': 'We are all going to die',
+                'OFFICIALS_DECLARE_EMERGENCY': 'Officials declare emergency',
+                'DEBATE_AND_SCAM': 'Debate and scam',
+                'YOURE_DESTROYING_OUR_FUTURE': "You're destroying our future",
+                '12_YEARS': '12 Years to Save the World'
+            };
+            return narrativeMapping[d] || d;
+        });
+
+        // Add x-axis with explicit styling
+        const xAxisGroup = g.append('g')
+            .attr('class', 'chart-axis x-axis')
+            .attr('transform', `translate(0,${height})`)
+            .call(xAxis);
+        
+        // Style x-axis explicitly
+        xAxisGroup.selectAll('text')
+            .style('font-size', '18px')
+            .style('fill', '#000000')
+            .style('font-weight', 'bold');
+        
+        xAxisGroup.selectAll('path, line')
+            .style('stroke', '#000000')
+            .style('stroke-width', '2px');
+        
+        // Add y-axis
+        const yAxisGroup = g.append('g')
+            .attr('class', 'chart-axis y-axis')
+            .call(yAxis);
+        
+        yAxisGroup.selectAll('text')
+            .style('font-size', '16px')
+            .style('fill', '#000000')
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                const title = NARRATIVE_MAPPING[d] || d;
+                let description = 'Description not available';
+                
+                // Your full original descriptions
+                if (d === 'POLLUTION_IS_CHOKING') description = 'The manifestations of our consumer society can be seen all around us. Through responsible consumption we can rid the natural world of these pollutants - one pollutant at a time.';
+                else if (d === 'WIN_WIN') description = 'We should focus on strategies that offer both environmental and economic benefits, creating opportunities for positive change in both areas.';
+                else if (d === 'FOSSIL_FUEL_SOLUTIOINISM') description = 'Fossil fuels are part of the solution. Our fuels are becoming more efficient and are the bridge towards a low-carbon future.';
+                else if (d === 'ADAPTATION') description = 'Any mitigation actions we take are too little, too late. Catastrophic climate change is already locked-in. We should adapt, or accept our fate in the hands of God or nature.';
+                else if (d === 'NO_STICKS') description = 'Society will only respond to supportive and voluntary policies, restrictive measures will fail and should be abandoned.';
+                else if (d === 'EVERY_LITTLE_HELPS') description = 'This narrative presents a society which has transitioned to a sustainable green way of life. Could be expressed by portraying individuals as the protagonists of stories that propose solutions to climate change.';
+                else if (d === 'VICTIM_BLAMING') description = 'Individuals and consumers are ultimately responsible for taking actions to address climate change.';
+                else if (d === 'COLLAPSE_IS_IMMINENT') description = 'The climate crisis is such that some kind of societal collapse is near inevitable. Due to the inaction of the negligent or complacent politicians the social contract has broken down and it is incumbent upon individuals to engage in non-violent civil disobedience to shock society into urgent action.';
+                else if (d === 'OTHERS_ARE_WORSE') description = 'Other countries, cities or industries are worse than ourselves. There is no point for us to implement climate policies, because we only cause a small fraction of the emissions. As long as others emit even more than us, actions will not be effective.';
+                else if (d === 'CARBON_EXPANSION') description = 'The free market is at the centre of this narrative which presents action on climate change as an obstacle to the freedom and well-being of citizens. The narrative can stress social justice or well-being of individual citizens.';
+                else if (d === 'TECHNOLOGICAL_OPTIMISM') description = 'We should focus our efforts on current and future technologies, which will unlock great possibilities for addressing climate change.';
+                else if (d === 'ENDANGERED_SPECIES') description = 'Endangered species (like polar bears) are the helpless victims of this narrative, who are seeing their habitat destroyed by the actions of villainous humans.';
+                else if (d === 'ALL_TALK') description = 'This narrative emphasises inconsistency between ambitious climate action targets and actual actions.';
+                else if (d === 'CLIMATE_SOLUTIONS_WONT_WORK') description = 'Climate policies are harmful and a threat to society and the economy. Climate policies are ineffective and too difficult to implement.';
+                else if (d === 'NO_NEED_TO_ACT') description = 'Human greenhouse gases are not causing global warming. The current warming is part of a natural cycle. Events such as extreme weather are not due to climate change.';
+                else if (d === 'GORE') description = 'This is a narrative of scientific discovery which climaxes on the certainty that climate change is unequivocally caused by humans.';
+                else if (d === 'ALL_GOING_TO_DIE') description = 'This narrative shows the current or potential catastrophic impact of climate change on people.';
+                else if (d === 'OFFICIALS_DECLARE_EMERGENCY') description = 'The climate crisis is sufficiently severe that it warrants declaring a climate emergency. This should occur at different levels of government as climate requires action at all levels, from the hyper-local to the global.';
+                else if (d === 'DEBATE_AND_SCAM') description = 'The heroes of this narrative are sceptical individuals who dare to challenge the false consensus on climate change which is propagated by those with vested interests.';
+                else if (d === 'YOURE_DESTROYING_OUR_FUTURE') description = 'The political stasis around climate change means that we cannot rely on politicians to create the change necessary. With collective action, even the politically weak can make a difference and secure a future for generations to come. This can manifest as anything from protests (school strikes) to non-violent civil disobedience.';
+                else if (d === '12_YEARS') description = 'Past and present human action (or inaction) risks a catastrophic future climatic event unless people change their behaviour to mitigate climate change.';
+                
+                showChartTooltip(event, title, description);
+            })
+            .on('mouseout', hideChartTooltip);
+        
+        yAxisGroup.selectAll('path, line')
+            .style('stroke', '#000000')
+            .style('stroke-width', '2px');
+
+        // Add axis labels with much larger font
+        g.append('text').attr('class', 'chart-axis-label').attr('transform', `translate(${width/2}, ${height + 60})`)
+            .style('text-anchor', 'middle').style('font-size', '22px').style('font-weight', 'bold').text('Percentage (%)');
+
+        // Create bars for USA
+        g.selectAll('.bar-usa').data(sortedData).enter().append('rect')
+            .attr('class', 'chart-bar usa')
+            .attr('x', 0)
+            .attr('y', d => yScale(d.Narrative))
+            .attr('width', d => xScale(d.USA_Percentage_num))
+            .attr('height', yScale.bandwidth() / 2);
+
+        // Create bars for Australia
+        g.selectAll('.bar-australia').data(sortedData).enter().append('rect')
+            .attr('class', 'chart-bar australia')
+            .attr('x', 0)
+            .attr('y', d => yScale(d.Narrative) + yScale.bandwidth() / 2)
+            .attr('width', d => xScale(d.Australia_Percentage_num))
+            .attr('height', yScale.bandwidth() / 2);
+
+
+        // Add legend (positioned in top-right area beyond the bars)
+        const legend = g.append('g').attr('class', 'chart-legend').attr('transform', `translate(${width + 10}, -20)`);
+        legend.append('rect').attr('x', 0).attr('y', 0).attr('width', 18).attr('height', 18).attr('fill', '#1f77b4');
+        legend.append('text').attr('x', 25).attr('y', 14).style('font-size', '20px').style('font-weight', 'bold').text('USA');
+        legend.append('rect').attr('x', 0).attr('y', 30).attr('width', 18).attr('height', 18).attr('fill', '#ff7f0e');
+        legend.append('text').attr('x', 25).attr('y', 44).style('font-size', '20px').style('font-weight', 'bold').text('Australia');
+    }
+
+    // Tooltip functions for chart
+    function showChartTooltip(event, title, description) {
+        // Create tooltip if it doesn't exist
+        let tooltip = document.getElementById('chart-tooltip');
+        if (!tooltip) {
+            tooltip = document.createElement('div');
+            tooltip.id = 'chart-tooltip';
+            tooltip.className = 'tooltip';
+            document.body.appendChild(tooltip);
+        }
+        
+        tooltip.innerHTML = `<h4 style="color: var(--primary-teal); font-size: 1rem; font-weight: 600; margin: 0 0 6px 0;">${title}</h4><p style="margin: 0; font-size: 0.85rem;">${description}</p>`;
+        tooltip.classList.add('show');
+        tooltip.style.left = (event.pageX + 10) + 'px';
+        tooltip.style.top = (event.pageY - 30) + 'px';
+    }
+    
+    function hideChartTooltip() {
+        const tooltip = document.getElementById('chart-tooltip');
+        if (tooltip) {
+            tooltip.classList.remove('show');
+        }
+    }
+
+    // Initialize the chart when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeDynamicComparisonChart();
+    });
+    </script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 /* CSS Custom Properties for Color Scheme */
 :root {
     --primary-purple: #8B7EC8;
@@ -31,7 +32,11 @@
 
 html {
     scroll-behavior: smooth;
-    font-size: 16px;
+    font-size: 16px !important;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
@@ -40,6 +45,10 @@ body {
     color: var(--text-dark);
     background-color: var(--background-white);
     overflow-x: hidden;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 .container {
@@ -1410,6 +1419,190 @@ body {
     box-shadow: 0 8px 25px var(--shadow-medium);
 }
 
+/* Interactive Comparison Chart Styles */
+.interactive-comparison-chart {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.narrative-hotspot {
+    position: absolute;
+    cursor: pointer;
+    background: rgba(139, 126, 200, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.narrative-hotspot:hover {
+    background: rgba(139, 126, 200, 0.3);
+    border-color: var(--primary-purple);
+    transform: scale(1.02);
+}
+
+/* Narrative Modal Styles */
+.narrative-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.narrative-modal-content {
+    background-color: var(--background-white);
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.narrative-modal-close {
+    color: var(--text-light);
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: transparent;
+}
+
+.narrative-modal-close:hover {
+    color: var(--primary-purple);
+    background: rgba(139, 126, 200, 0.1);
+}
+
+.narrative-modal h3 {
+    color: var(--primary-purple);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-right: 3rem;
+    border-bottom: 2px solid var(--primary-purple);
+    padding-bottom: 0.5rem;
+}
+
+.narrative-structure,
+.narrative-description,
+.narrative-source {
+    margin-bottom: 1.5rem;
+}
+
+.narrative-structure h4,
+.narrative-description h4,
+.narrative-source h4 {
+    color: var(--text-dark);
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.narrative-structure-content {
+    background: var(--background-light);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-teal);
+}
+
+.structure-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.structure-item:last-child {
+    border-bottom: none;
+}
+
+.structure-label {
+    font-weight: 600;
+    color: var(--text-dark);
+    min-width: 120px;
+}
+
+.structure-value {
+    color: var(--text-medium);
+    text-align: right;
+    flex: 1;
+}
+
+.narrative-description p {
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.narrative-source p {
+    color: var(--text-light);
+    font-style: italic;
+    margin: 0;
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+    .narrative-modal-content {
+        margin: 10% auto;
+        width: 95%;
+        padding: 1.5rem;
+        max-height: 70vh;
+    }
+    
+    .narrative-modal h3 {
+        font-size: 1.5rem;
+        padding-right: 2.5rem;
+    }
+    
+    .narrative-modal-close {
+        top: 0.8rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        width: 35px;
+        height: 35px;
+    }
+    
+    .structure-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+    
+    .structure-value {
+        text-align: left;
+    }
+}
+
 /* Benefits Carousel Navigation - Reuse existing carousel styles */
 .benefits-carousel .carousel-btn {
     position: absolute;
@@ -1933,7 +2126,7 @@ body {
     .section {
         box-shadow: none;
         border: 1px solid var(--border-light);
-        break-inside: avoid;
+        page-break-inside: avoid;
     }
     
     body {

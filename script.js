@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeInteractiveExample();
     initializeComparisonCarousel();
     initializeBenefitsCarousel();
+    initializeInteractiveComparison();
 });
 
 // Navigation functionality
@@ -32,17 +33,23 @@ function initializeNavigation() {
     // Smooth scrolling for navigation links
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
+            const href = this.getAttribute('href');
             
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
+            // Only prevent default for internal anchor links (starting with #)
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
             }
+            // For external links (like method.html, index.html), let the browser handle navigation normally
         });
     });
     
@@ -843,15 +850,15 @@ function initializeMobileNavigation() {
 // Initialize mobile navigation on resize
 window.addEventListener('resize', debounce(initializeMobileNavigation, 250));
 
-// Add loading animation
-window.addEventListener('load', function() {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease-in';
-    
-    setTimeout(function() {
-        document.body.style.opacity = '1';
-    }, 100);
-});
+// Add loading animation - removed to fix font rendering issues
+// window.addEventListener('load', function() {
+//     document.body.style.opacity = '0';
+//     document.body.style.transition = 'opacity 0.5s ease-in';
+//     
+//     setTimeout(function() {
+//         document.body.style.opacity = '1';
+//     }, 100);
+// });
 
 // Add keyboard navigation support
 document.addEventListener('keydown', function(e) {
@@ -884,4 +891,775 @@ window.addEventListener('error', function(e) {
         console.warn('Failed to load external resource:', e.target.src || e.target.href);
         // Graceful degradation - the site should still work without external resources
     }
+});
+
+// Interactive Comparison Chart Functionality
+function initializeInteractiveComparison() {
+    // Narrative data from the paper - updated with actual data order
+    const narrativeData = {
+        'pollution-is-choking': {
+            title: "Pollution is choking our planet",
+            structure: {
+                hero: "Environmental Organizations & Activists",
+                villain: "Industry Emissions",
+                victim: "Animals/Nature/Environment, General Public",
+                action: "Prevent Conflict",
+                culturalStory: "Egalitarian"
+            },
+            description: "This narrative emphasizes the immediate harmful effects of pollution on our environment and public health, calling for urgent action to address environmental degradation.",
+            source: "Generated from data"
+        },
+        'win-win': {
+            title: "Win-win scenario",
+            structure: {
+                hero: "Green Technology & Innovation, General Public",
+                villain: "Optional",
+                victim: "Optional",
+                action: "Fuel Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "This narrative presents climate action as beneficial for both the economy and environment, emphasizing positive outcomes for all stakeholders.",
+            source: "Generated from data"
+        },
+        'fossil-fuel-solutionism': {
+            title: "Fossil fuel solutionism",
+            structure: {
+                hero: "Industry Emissions, Green Technology & Innovation",
+                villain: "Environmental Organizations & Activists",
+                victim: "General Public",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "This narrative suggests that fossil fuel industries can provide solutions to climate change through technological innovation, rather than requiring fundamental changes to energy systems.",
+            source: "Generated from data"
+        },
+        'adaptation': {
+            title: "Adaptation",
+            structure: {
+                hero: "Science Experts & Scientific Reports, Governments & Politicians",
+                villain: "Climate Change",
+                victim: "General Public, Animals/Nature/Environment",
+                action: "Fuel Resolution",
+                culturalStory: "Hierarchical"
+            },
+            description: "This narrative focuses on adapting to climate change impacts rather than preventing them, emphasizing resilience and adjustment strategies.",
+            source: "Generated from data"
+        },
+        'no-sticks-carrots': {
+            title: "No sticks just carrots",
+            structure: {
+                hero: "Legislation & Policies",
+                villain: "Legislation & Policies",
+                victim: "General Public",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "Society will only respond to supportive and voluntary policies, restrictive measures will fail and should be abandoned.",
+            source: "Lamb et al. (2020)"
+        },
+        'every-little-helps': {
+            title: "Every little helps",
+            structure: {
+                hero: "General Public",
+                villain: "General Public",
+                victim: "Optional",
+                action: "Fuel Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "This narrative presents a society which has transitioned to a sustainable 'green' way of life. Could be by portraying individuals as the protagonists of stories that propose solutions to climate change.",
+            source: "Bushell et al. (2017)"
+        },
+        'victim-blaming': {
+            title: "Victim blaming",
+            structure: {
+                hero: "Optional",
+                villain: "General Public",
+                victim: "General Public",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "Individuals and consumers are ultimately responsible for taking actions to address climate change.",
+            source: "Lamb et al. (2020)"
+        },
+        'collapse-imminent': {
+            title: "The collapse is imminent",
+            structure: {
+                hero: "Environmental Organizations & Activists",
+                villain: "Governments & Politicians",
+                victim: "Optional",
+                action: "Fuel Resolution",
+                culturalStory: "Egalitarian"
+            },
+            description: "The climate crisis is such that some kind of societal collapse is near inevitable. Due to the inaction of the negligent or complacent politicians the social contract has broken down and it is incumbent upon individuals to engage in non-violent civil disobedience to shock society into urgent action.",
+            source: "Bevan (2020)"
+        },
+        'others-worse': {
+            title: "Others are worse than us",
+            structure: {
+                hero: "Governments & Politicians",
+                villain: "Governments & Politicians",
+                victim: "Optional",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "Other countries, cities or industries are worse than ourselves. There is no point for us to implement climate policies, because we only cause a small fraction of the emissions. As long as others emit even more than us, actions won't be effective.",
+            source: "Lamb et al. (2020)"
+        },
+        'carbon-fueled-expansion': {
+            title: "Carbon fueled expansion",
+            structure: {
+                hero: "Optional",
+                villain: "Legislation & Policies, Green Technology & Innovation",
+                victim: "General Public, Industry Emissions",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "The free market is at the centre of this narrative which presents action on climate change as an obstacle to the freedom and well-being of citizens. The narrative can stress social justice or well-being of individual citizens.",
+            source: "Bushell et al. (2017)"
+        },
+        'technological-optimism': {
+            title: "Technological optimism",
+            structure: {
+                hero: "Green Technology & Innovation",
+                villain: "Industry Emissions, Climate Change",
+                victim: "Optional",
+                action: "Fuel Resolution",
+                culturalStory: "Egalitarian"
+            },
+            description: "We should focus our efforts on current and future technologies, which will unlock great possibilities for addressing climate change.",
+            source: "Lamb et al. (2020)"
+        },
+        'endangered-species': {
+            title: "Endangered species",
+            structure: {
+                hero: "Optional",
+                villain: "Governments & Politicians, Legislation & Policies, Industry Emissions",
+                victim: "Animals/Nature/Environment",
+                action: "Prevent Conflict",
+                culturalStory: "Hierarchical"
+            },
+            description: "Endangered species (like polar bears) are the helpless victims of this narrative, who are seeing their habitat destroyed by the actions of villainous humans.",
+            source: "Bushell et al. (2017)"
+        },
+        'all-talk-action': {
+            title: "All talk little action",
+            structure: {
+                hero: "Optional",
+                villain: "Governments & Politicians",
+                victim: "Optional",
+                action: "Prevent Resolution",
+                culturalStory: "Egalitarian"
+            },
+            description: "This narrative emphasises inconsistency between ambitious climate action targets and actual actions.",
+            source: "Lamb et al. (2020)"
+        },
+        'climate-solutions-wont-work': {
+            title: "Climate solutions won't work",
+            structure: {
+                hero: "Optional",
+                villain: "Legislation & Policies, Green Technology & Innovation",
+                victim: "General Public, Animals/Nature/Environment",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "Climate policies are harmful and a threat to society and the economy. Climate policies are ineffective and too difficult to implement.",
+            source: "Lamb et al. (2020)"
+        },
+        'no-need-to-act': {
+            title: "No need to act",
+            structure: {
+                hero: "Science Experts & Scientific Reports",
+                villain: "Environmental Organizations & Activists",
+                victim: "Optional",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "This narrative questions or ridicules the reality of climate change, suggesting that no action is necessary because the problem is exaggerated or non-existent.",
+            source: "Generated from data"
+        },
+        'gore': {
+            title: "Gore",
+            structure: {
+                hero: "Science Experts & Scientific Reports",
+                villain: "Governments & Politicians, General Public, Industry Emissions",
+                victim: "Animals/Nature/Environment, Climate Change",
+                action: "Fuel Resolution",
+                culturalStory: "Hierarchical"
+            },
+            description: "This is a narrative of scientific discovery which climaxes on the certainty that climate change is unequivocally caused by humans.",
+            source: "Bushell et al. (2017)"
+        },
+        'we-all-going-die': {
+            title: "We are all going to die",
+            structure: {
+                hero: "Optional",
+                villain: "Climate Change, Industry Emissions",
+                victim: "General Public",
+                action: "Prevent Conflict",
+                culturalStory: "Egalitarian"
+            },
+            description: "This narrative shows the current or potential catastrophic impact of climate change on people.",
+            source: "Shanahan (2007)"
+        },
+        'officials-declare-emergency': {
+            title: "Officials declare climate emergency",
+            structure: {
+                hero: "Governments & Politicians",
+                villain: "Industry Emissions, Climate Change, Governments & Politicians",
+                victim: "Optional",
+                action: "Fuel Resolution",
+                culturalStory: "Hierarchical"
+            },
+            description: "The climate crisis is sufficiently severe that it warrants declaring a climate emergency. This should occur at different levels of government as climate requires action at all levels, from the hyper-local to the global.",
+            source: "Bevan (2020)"
+        },
+        'debate-scam': {
+            title: "Debate and scam",
+            structure: {
+                hero: "Optional",
+                villain: "Governments & Politicians, Legislation & Policies, Environmental Organizations & Activists, Media & Journalists",
+                victim: "Optional",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "The heroes of this narrative are sceptical individuals who dare to challenge the false consensus on climate change which is propagated by those with vested interests.",
+            source: "Lamb et al. (2020)"
+        },
+        'youre-destroying-future': {
+            title: "You're destroying our future",
+            structure: {
+                hero: "Environmental Organizations & Activists",
+                villain: "Governments & Politicians",
+                victim: "Optional",
+                action: "Fuel Resolution",
+                culturalStory: "Egalitarian"
+            },
+            description: "The political stasis around climate change means that we cannot rely on politicians to create the change necessary. With collective action, even the politically weak can make a difference and secure a future for generations to come. This can manifest as anything from protests (school strikes) to non-violent civil disobedience.",
+            source: "Bevan (2020)"
+        },
+        '12-years-save-world': {
+            title: "12 Years to Save the World",
+            structure: {
+                hero: "Optional",
+                villain: "Governments & Politicians",
+                victim: "Animals/Nature/Environment, General Public, Climate Change",
+                action: "Prevent Conflict",
+                culturalStory: "Hierarchical"
+            },
+            description: "Past and present human action (or inaction) risks a catastrophic future climatic event unless people change their behaviour to mitigate climate change.",
+            source: "Bevan (2020)"
+        },
+        'technological-optimism': {
+            title: "Technological optimism",
+            structure: {
+                hero: "Green Technology & Innovation",
+                villain: "Industry Emissions, Climate Change",
+                victim: "Optional",
+                action: "Fuel Resolution",
+                culturalStory: "Egalitarian"
+            },
+            description: "We should focus our efforts on current and future technologies, which will unlock great possibilities for addressing climate change.",
+            source: "Lamb et al. (2020)"
+        },
+        'officials-declare-emergency': {
+            title: "Officials declare climate emergency",
+            structure: {
+                hero: "Governments & Politicians",
+                villain: "Industry Emissions, Climate Change, Governments & Politicians",
+                victim: "Optional",
+                action: "Fuel Resolution",
+                culturalStory: "Hierarchical"
+            },
+            description: "The climate crisis is sufficiently severe that it warrants declaring a climate emergency. This should occur at different levels of government as climate requires action at all levels, from the hyper-local to the global.",
+            source: "Bevan (2020)"
+        },
+        'every-little-helps': {
+            title: "Every little helps",
+            structure: {
+                hero: "General Public",
+                villain: "General Public",
+                victim: "Optional",
+                action: "Fuel Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "This narrative presents a society which has transitioned to a sustainable 'green' way of life. Could be by portraying individuals as the protagonists of stories that propose solutions to climate change.",
+            source: "Bushell et al. (2017)"
+        },
+        '12-years-save-world': {
+            title: "12 Years to Save the World",
+            structure: {
+                hero: "Optional",
+                villain: "Governments & Politicians",
+                victim: "Animals/Nature/Environment, General Public, Climate Change",
+                action: "Prevent Conflict",
+                culturalStory: "Hierarchical"
+            },
+            description: "Past and present human action (or inaction) risks a catastrophic future climatic event unless people change their behaviour to mitigate climate change.",
+            source: "Bevan (2020)"
+        },
+        'gore': {
+            title: "Gore",
+            structure: {
+                hero: "Science Experts & Scientific Reports",
+                villain: "Governments & Politicians, General Public, Industry Emissions",
+                victim: "Animals/Nature/Environment, Climate Change",
+                action: "Fuel Resolution",
+                culturalStory: "Hierarchical"
+            },
+            description: "This is a narrative of scientific discovery which climaxes on the certainty that climate change is unequivocally caused by humans.",
+            source: "Bushell et al. (2017)"
+        },
+        'collapse-imminent': {
+            title: "The collapse is imminent",
+            structure: {
+                hero: "Environmental Organizations & Activists",
+                villain: "Governments & Politicians",
+                victim: "Optional",
+                action: "Fuel Resolution",
+                culturalStory: "Egalitarian"
+            },
+            description: "The climate crisis is such that some kind of societal collapse is near inevitable. Due to the inaction of the negligent or complacent politicians the social contract has broken down and it is incumbent upon individuals to engage in non-violent civil disobedience to shock society into urgent action.",
+            source: "Bevan (2020)"
+        },
+        'climate-solutions-wont-work': {
+            title: "Climate solutions won't work",
+            structure: {
+                hero: "Optional",
+                villain: "Legislation & Policies, Green Technology & Innovation",
+                victim: "General Public, Animals/Nature/Environment",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "Climate policies are harmful and a threat to society and the economy. Climate policies are ineffective and too difficult to implement.",
+            source: "Lamb et al. (2020)"
+        },
+        'no-sticks-carrots': {
+            title: "No sticks just carrots",
+            structure: {
+                hero: "Legislation & Policies",
+                villain: "Legislation & Policies",
+                victim: "General Public",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "Society will only respond to supportive and voluntary policies, restrictive measures will fail and should be abandoned.",
+            source: "Lamb et al. (2020)"
+        },
+        'all-talk-action': {
+            title: "All talk little action",
+            structure: {
+                hero: "Optional",
+                villain: "Governments & Politicians",
+                victim: "Optional",
+                action: "Prevent Resolution",
+                culturalStory: "Egalitarian"
+            },
+            description: "This narrative emphasises inconsistency between ambitious climate action targets and actual actions.",
+            source: "Lamb et al. (2020)"
+        },
+        'victim-blaming': {
+            title: "Victim blaming",
+            structure: {
+                hero: "Optional",
+                villain: "General Public",
+                victim: "General Public",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "Individuals and consumers are ultimately responsible for taking actions to address climate change.",
+            source: "Lamb et al. (2020)"
+        },
+        'debate-scam': {
+            title: "Debate and scam",
+            structure: {
+                hero: "Optional",
+                villain: "Governments & Politicians, Legislation & Policies, Environmental Organizations & Activists, Media & Journalists",
+                victim: "Optional",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "The heroes of this narrative are sceptical individuals who dare to challenge the false consensus on climate change which is propagated by those with vested interests.",
+            source: "Lamb et al. (2020)"
+        },
+        'others-worse': {
+            title: "Others are worse than us",
+            structure: {
+                hero: "Governments & Politicians",
+                villain: "Governments & Politicians",
+                victim: "Optional",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "Other countries, cities or industries are worse than ourselves. There is no point for us to implement climate policies, because we only cause a small fraction of the emissions. As long as others emit even more than us, actions won't be effective.",
+            source: "Lamb et al. (2020)"
+        },
+        'endangered-species': {
+            title: "Endangered species",
+            structure: {
+                hero: "Optional",
+                villain: "Governments & Politicians, Legislation & Policies, Industry Emissions",
+                victim: "Animals/Nature/Environment",
+                action: "Prevent Conflict",
+                culturalStory: "Hierarchical"
+            },
+            description: "Endangered species (like polar bears) are the helpless victims of this narrative, who are seeing their habitat destroyed by the actions of villainous humans.",
+            source: "Bushell et al. (2017)"
+        },
+        'we-all-going-die': {
+            title: "We are all going to die",
+            structure: {
+                hero: "Optional",
+                villain: "Climate Change, Industry Emissions",
+                victim: "General Public",
+                action: "Prevent Conflict",
+                culturalStory: "Egalitarian"
+            },
+            description: "This narrative shows the current or potential catastrophic impact of climate change on people.",
+            source: "Shanahan (2007)"
+        },
+        'carbon-fueled-expansion': {
+            title: "Carbon fueled expansion",
+            structure: {
+                hero: "Optional",
+                villain: "Legislation & Policies, Green Technology & Innovation",
+                victim: "General Public, Industry Emissions",
+                action: "Prevent Resolution",
+                culturalStory: "Individualistic"
+            },
+            description: "The free market is at the centre of this narrative which presents action on climate change as an obstacle to the freedom and well-being of citizens. The narrative can stress social justice or well-being of individual citizens.",
+            source: "Bushell et al. (2017)"
+        }
+    };
+
+    // Get modal elements
+    const modal = document.getElementById('narrative-modal');
+    const modalTitle = document.getElementById('narrative-title');
+    const modalStructure = document.getElementById('narrative-structure-content');
+    const modalDescription = document.getElementById('narrative-description-content');
+    const modalSource = document.getElementById('narrative-source-content');
+    const closeBtn = document.querySelector('.narrative-modal-close');
+
+    // Add click listeners to hotspots
+    const hotspots = document.querySelectorAll('.narrative-hotspot');
+    hotspots.forEach(hotspot => {
+        hotspot.addEventListener('click', function() {
+            const narrativeKey = this.getAttribute('data-narrative');
+            const narrative = narrativeData[narrativeKey];
+            
+            if (narrative) {
+                showNarrativeModal(narrative);
+                trackEvent('narrative_clicked', { narrative: narrativeKey });
+            }
+        });
+
+        // Add hover effect
+        hotspot.addEventListener('mouseenter', function() {
+            this.style.background = 'rgba(139, 126, 200, 0.4)';
+        });
+
+        hotspot.addEventListener('mouseleave', function() {
+            this.style.background = 'rgba(139, 126, 200, 0.1)';
+        });
+    });
+
+    // Close modal functionality
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Keyboard support
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            closeModal();
+        }
+    });
+
+    function showNarrativeModal(narrative) {
+        modalTitle.textContent = narrative.title;
+        
+        // Build structure content
+        modalStructure.innerHTML = `
+            <div class="structure-item">
+                <span class="structure-label">Hero:</span>
+                <span class="structure-value">${narrative.structure.hero}</span>
+            </div>
+            <div class="structure-item">
+                <span class="structure-label">Villain:</span>
+                <span class="structure-value">${narrative.structure.villain}</span>
+            </div>
+            <div class="structure-item">
+                <span class="structure-label">Victim:</span>
+                <span class="structure-value">${narrative.structure.victim}</span>
+            </div>
+            <div class="structure-item">
+                <span class="structure-label">Action:</span>
+                <span class="structure-value">${narrative.structure.action}</span>
+            </div>
+            <div class="structure-item">
+                <span class="structure-label">Cultural Story:</span>
+                <span class="structure-value">${narrative.structure.culturalStory}</span>
+            </div>
+        `;
+        
+        modalDescription.textContent = narrative.description;
+        modalSource.textContent = narrative.source;
+        
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Focus management for accessibility
+        closeBtn.focus();
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Initialize dynamic comparison chart
+function initializeDynamicComparisonChart() {
+    // This function is overridden by the embedded script in index.html
+    console.log('Dynamic comparison chart initialization called from script.js');
+}
+
+function createComparisonChart(data, sortBy) {
+    // Sort data based on selected option
+    let sortedData = [...data];
+    switch(sortBy) {
+        case 'usa':
+            sortedData.sort((a, b) => a.USA_Percentage_num - b.USA_Percentage_num);
+            break;
+        case 'australia':
+            sortedData.sort((a, b) => a.Australia_Percentage_num - b.Australia_Percentage_num);
+            break;
+        case 'difference':
+            sortedData.sort((a, b) => a.Difference - b.Difference);
+            break;
+    }
+    
+    // Clear existing chart
+    d3.select('#dynamic-comparison-chart').selectAll('*').remove();
+    
+    // Set dimensions and margins
+    const margin = {top: 20, right: 80, bottom: 100, left: 200};
+    const width = 900 - margin.left - margin.right;
+    const height = Math.max(600, sortedData.length * 25) - margin.top - margin.bottom;
+    
+    // Create SVG
+    const svg = d3.select('#dynamic-comparison-chart')
+        .append('svg')
+        .attr('class', 'chart-svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom);
+    
+    const g = svg.append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+    
+    // Create scales
+    const xScale = d3.scaleLinear()
+        .domain([0, d3.max(sortedData, d => Math.max(d.USA_Percentage_num, d.Australia_Percentage_num))])
+        .range([0, width]);
+    
+    const yScale = d3.scaleBand()
+        .domain(sortedData.map(d => d.Narrative))
+        .range([0, height])
+        .padding(0.1);
+    
+    // Create axes
+    const xAxis = d3.axisBottom(xScale)
+        .tickFormat(d => d + '%');
+    
+    const yAxis = d3.axisLeft(yScale)
+        .tickFormat(d => {
+            // Map narrative codes to display names
+            const narrativeMapping = {
+                'POLLUTION_IS_CHOKING': 'Pollution is choking our planet',
+                'WIN_WIN': 'Win-win scenario',
+                'FOSSIL_FUEL_SOLUTIOINISM': 'Fossil fuel solutionism',
+                'ADAPTATION': 'Adaptation',
+                'NO_STICKS': 'No sticks just carrots',
+                'EVERY_LITTLE_HELPS': 'Every little helps',
+                'VICTIM_BLAMING': 'Victim blaming',
+                'COLLAPSE_IS_IMMINENT': 'The collapse is imminent',
+                'OTHERS_ARE_WORSE': 'Others are worse than us',
+                'CARBON_EXPANSION': 'Carbon fueled expansion',
+                'TECHNOLOGICAL_OPTIMISM': 'Technological optimism',
+                'ENDANGERED_SPECIES': 'Endangered species',
+                'ALL_TALK': 'All talk little action',
+                'CLIMATE_SOLUTIONS_WONT_WORK': "Climate solutions won't work",
+                'NO_NEED_TO_ACT': 'No need to act',
+                'GORE': 'Gore',
+                'ALL_GOING_TO_DIE': 'We are all going to die',
+                'OFFICIALS_DECLARE_EMERGENCY': 'Officials declare climate emergency',
+                'DEBATE_AND_SCAM': 'Debate and scam',
+                'YOURE_DESTROYING_OUR_FUTURE': "You're destroying our future",
+                '12_YEARS': '12 Years to Save the World'
+            };
+            return narrativeMapping[d] || d;
+        });
+    
+    // Add axes
+    g.append('g')
+        .attr('class', 'chart-axis')
+        .attr('transform', `translate(0,${height})`)
+        .call(xAxis);
+    
+    g.append('g')
+        .attr('class', 'chart-axis')
+        .call(yAxis);
+    
+    // Add axis labels
+    g.append('text')
+        .attr('class', 'chart-axis-label')
+        .attr('transform', `translate(${width/2}, ${height + 40})`)
+        .style('text-anchor', 'middle')
+        .text('Percentage (%)');
+    
+    // Create bars for USA
+    g.selectAll('.bar-usa')
+        .data(sortedData)
+        .enter().append('rect')
+        .attr('class', 'chart-bar usa')
+        .attr('x', 0)
+        .attr('y', d => yScale(d.Narrative))
+        .attr('width', d => xScale(d.USA_Percentage_num))
+        .attr('height', yScale.bandwidth() / 2)
+        .on('mouseover', function(event, d) {
+            showTooltip(event, `USA: ${d.USA_Percentage_num.toFixed(1)}%`);
+        })
+        .on('mouseout', hideTooltip);
+    
+    // Create bars for Australia
+    g.selectAll('.bar-australia')
+        .data(sortedData)
+        .enter().append('rect')
+        .attr('class', 'chart-bar australia')
+        .attr('x', 0)
+        .attr('y', d => yScale(d.Narrative) + yScale.bandwidth() / 2)
+        .attr('width', d => xScale(d.Australia_Percentage_num))
+        .attr('height', yScale.bandwidth() / 2)
+        .on('mouseover', function(event, d) {
+            showTooltip(event, `Australia: ${d.Australia_Percentage_num.toFixed(1)}%`);
+        })
+        .on('mouseout', hideTooltip);
+    
+    // Add percentage labels
+    g.selectAll('.label-usa')
+        .data(sortedData)
+        .enter().append('text')
+        .attr('class', 'chart-axis')
+        .attr('x', d => xScale(d.USA_Percentage_num) + 5)
+        .attr('y', d => yScale(d.Narrative) + yScale.bandwidth() / 4)
+        .attr('dy', '0.35em')
+        .style('font-size', '10px')
+        .text(d => d.USA_Percentage_num > 0 ? `${d.USA_Percentage_num.toFixed(1)}%` : '');
+    
+    g.selectAll('.label-australia')
+        .data(sortedData)
+        .enter().append('text')
+        .attr('class', 'chart-axis')
+        .attr('x', d => xScale(d.Australia_Percentage_num) + 5)
+        .attr('y', d => yScale(d.Narrative) + 3 * yScale.bandwidth() / 4)
+        .attr('dy', '0.35em')
+        .style('font-size', '10px')
+        .text(d => d.Australia_Percentage_num > 0 ? `${d.Australia_Percentage_num.toFixed(1)}%` : '');
+    
+    // Add legend
+    const legend = g.append('g')
+        .attr('class', 'chart-legend')
+        .attr('transform', `translate(${width - 100}, 20)`);
+    
+    legend.append('rect')
+        .attr('x', 0)
+        .attr('y', 0)
+        .attr('width', 15)
+        .attr('height', 15)
+        .attr('fill', '#1f77b4');
+    
+    legend.append('text')
+        .attr('x', 20)
+        .attr('y', 12)
+        .text('USA');
+    
+    legend.append('rect')
+        .attr('x', 0)
+        .attr('y', 25)
+        .attr('width', 15)
+        .attr('height', 15)
+        .attr('fill', '#ff7f0e');
+    
+    legend.append('text')
+        .attr('x', 20)
+        .attr('y', 37)
+        .text('Australia');
+    
+    // Make narrative labels clickable
+    g.selectAll('.tick text')
+        .style('cursor', 'pointer')
+        .attr('class', 'chart-narrative-label')
+        .on('click', function(event, d) {
+            // Convert display name back to narrative key
+            const reverseMapping = {
+                'Pollution is choking our planet': 'pollution-is-choking',
+                'Win-win scenario': 'win-win',
+                'Fossil fuel solutionism': 'fossil-fuel-solutionism',
+                'Adaptation': 'adaptation',
+                'No sticks just carrots': 'no-sticks-carrots',
+                'Every little helps': 'every-little-helps',
+                'Victim blaming': 'victim-blaming',
+                'The collapse is imminent': 'collapse-imminent',
+                'Others are worse than us': 'others-worse',
+                'Carbon fueled expansion': 'carbon-fueled-expansion',
+                'Technological optimism': 'technological-optimism',
+                'Endangered species': 'endangered-species',
+                'All talk little action': 'all-talk-action',
+                "Climate solutions won't work": 'climate-solutions-wont-work',
+                'No need to act': 'no-need-to-act',
+                'Gore': 'gore',
+                'We are all going to die': 'we-all-going-die',
+                'Officials declare climate emergency': 'officials-declare-emergency',
+                'Debate and scam': 'debate-scam',
+                "You're destroying our future": 'youre-destroying-future',
+                '12 Years to Save the World': '12-years-save-world'
+            };
+            
+            const narrativeKey = reverseMapping[d];
+            if (narrativeKey && narrativeData[narrativeKey]) {
+                showNarrativeModal(narrativeData[narrativeKey]);
+                trackEvent('narrative_clicked', { narrative: narrativeKey });
+            }
+        });
+    
+    // Create tooltip
+    if (!document.getElementById('chart-tooltip')) {
+        const tooltip = d3.select('body').append('div')
+            .attr('id', 'chart-tooltip')
+            .attr('class', 'chart-tooltip');
+    }
+    
+    function showTooltip(event, text) {
+        const tooltip = d3.select('#chart-tooltip');
+        tooltip.transition().duration(200).style('opacity', 1);
+        tooltip.html(text)
+            .style('left', (event.pageX + 10) + 'px')
+            .style('top', (event.pageY - 28) + 'px')
+            .classed('show', true);
+    }
+    
+    function hideTooltip() {
+        const tooltip = d3.select('#chart-tooltip');
+        tooltip.transition().duration(500).style('opacity', 0)
+            .classed('show', false);
+    }
+}
+
+// Initialize interactive comparison when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Add to existing initialization
+    initializeInteractiveComparison();
+    initializeDynamicComparisonChart();
 });

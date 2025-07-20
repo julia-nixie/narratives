@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiments and Analysis - Narrative Media Framing in Political Discourse</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dynamic-chart-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">Narrative Framing</div>
+            <ul class="nav-menu">
+                <li><a href="index.html#introduction" class="nav-link">Introduction</a></li>
+                <li><a href="method.html" class="nav-link">Narrative components</a></li>
+                <li><a href="index.html#example" class="nav-link">Interactive example</a></li>
+                <li><a href="index.html#demo" class="nav-link">Demo</a></li>
+                <li><a href="experiments.html" class="nav-link active">Experiments</a></li>
+                <li><a href="index.html#comparison" class="nav-link">USA vs Australian narratives</a></li>
+                <li><a href="index.html#resources" class="nav-link">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Experiments -->
+            <section id="experiments" class="section">
+                <h2 class="section-title">Experiments and Analysis</h2>
+                <div class="section-content">
+                    <h3>On benefits of compositionality</h3>
+                    <p>To apply our framework, we rigorously annotate a dataset of climate-related articles published in the USA in 2017-2019, conduct extensive experiments with LLMs, and analyse the results in the context of political leanings. Please refer to our <a href="https://arxiv.org/pdf/2506.00737" style="color: var(--primary-purple); text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--primary-purple); transition: var(--transition);" onmouseover="this.style.color='var(--primary-teal)'; this.style.borderBottomColor='var(--primary-teal)'" onmouseout="this.style.color='var(--primary-purple)'; this.style.borderBottomColor='var(--primary-purple)'">paper</a> for details.</p>
+                    <p>Notably, the component-focused approach to narrative frames demonstrates benefits in all these aspects:</p>
+                    
+                    <div class="benefits-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-track">
+                                <!-- Slide 1: Bar Chart -->
+                                <div class="benefits-slide">
+                                    <div class="slide-content">
+                                        <div class="chart-container">
+                                            <h4>Inter-Annotator Agreement Improvement</h4>
+                                            <div class="chart-layout">
+                                                <div class="vertical-bar-chart">
+                                                    <div class="chart-bars">
+                                                        <div class="vertical-bar-item">
+                                                            <div class="vertical-bar-wrapper">
+                                                                <div class="vertical-bar vertical-bar-low" style="height: 37%;">
+                                                                    <span class="vertical-bar-value">37%</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-bar-label">Direct Narrative Labeling</div>
+                                                        </div>
+                                                        <div class="vertical-bar-item">
+                                                            <div class="vertical-bar-wrapper">
+                                                                <div class="vertical-bar vertical-bar-high" style="height: 63%;">
+                                                                    <span class="vertical-bar-value">63%</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="vertical-bar-label">Labeling by Narrative Components</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="chart-commentary">
+                            
+                                                    <p>Narrative frame components can be reliably annotated, achieving Krippendorff α in the range of 0.67-0.82.</p>
+                                                    <p>Deriving the resulting narrative frame label from component annotations results in a much higher agreement than predicting the narrative frame directly (63% vs 37%).</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 2: Framework Structure -->
+                                <div class="benefits-slide">
+                                    <div class="slide-content">
+                                        <h4>Improved Model Performance</h4>
+                                        <div class="benefit-layout">
+                                            <div class="benefit-description">
+                                                <p>While regular LLM tricks like few-shot learning, PEFT and reasoning do not help to improve narrative prediction, including their structural components - even when predicted by the model rather than provided - does.</p>
+                                            </div>
+                                            <div class="benefit-image">
+                                                <img src="images/struct.jpg" alt="Framework Structure Diagram" class="framework-diagram">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 3: Political Leaning Analysis -->
+                                <div class="benefits-slide">
+                                    <div class="slide-content">
+                                        <h4>Political Leaning Analysis</h4>
+                                        <div class="full-width-images">
+                                            <div class="dual-image-container">
+                                                <div class="dual-image-item">
+                                                    <img src="images/narr_leaning.jpg" alt="Narrative Political Leaning Analysis" class="framework-diagram">
+                                                </div>
+                                                <div class="dual-image-item">
+                                                    <img src="images/story_conflict.jpg" alt="Story Conflict Analysis" class="framework-diagram">
+                                                </div>
+                                            </div>
+                                            <div class="bottom-comments">
+                                                <div class="single-comment">While there are some trends in narrative frames used by left-bias and right-bias sources, the paterns become more prominent when we look at the components that underly them. For instance, as the picture on the right shows, right-leaning outlets favor individualistic narratives with "preventing resolution" framing, while left-leaning outlets emphasize collective action.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Navigation arrows -->
+                        <button class="carousel-btn carousel-btn-prev" aria-label="Previous benefit">‹</button>
+                        <button class="carousel-btn carousel-btn-next" aria-label="Next benefit">›</button>
+                        
+                        <!-- Dots indicator -->
+                        <div class="carousel-dots">
+                            <button class="carousel-dot active" data-slide="0"></button>
+                            <button class="carousel-dot" data-slide="1"></button>
+                            <button class="carousel-dot" data-slide="2"></button>
+                        </div>
+                    </div>
+
+                    <div class="back-to-main">
+                        <a href="index.html" class="btn btn-outline">← Back to Main Page</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>For questions or collaborations, contact: <a href="mailto:y.otmakhova@unimelb.edu.au">y.otmakhova@unimelb.edu.au</a> or <a href="mailto:l.frermann@unimelb.edu.au">l.frermann@unimelb.edu.au</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
