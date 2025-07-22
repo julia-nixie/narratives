@@ -6,27 +6,27 @@ This repository contains the research data for the paper "Narrative Media Framin
 
 ## 📄 Paper Website
 
-The complete paper presentation with interactive features is available at:
+The paper presentation with interactive features is available at:
 **https://julia-nixie.github.io/narratives/**
 
-The website includes:
-- Interactive results tables and visualizations
-- LLM performance comparisons
-- Downloadable datasets (also available on this page)
+The website includes the following additions to the paper:
+- A live demo of the model
+- An interactive example
+- Comparison between the USA and Australian climate change narratives
 
 ## 📊 Research Data
 
-This repository also contains the annotated datasets used in the research:
+This repository also contains the annotated datasets used in the research (in Final_datasets):
 
-- `annotated_USA_100.csv` - Annotated US climate change articles (100 articles)
-- `annotated_Australia_100.csv` - Annotated Australian climate change articles (100 articles)
+- `annotated_USA_100.tsv` - Annotated US climate change articles (100 articles). Also available at https://huggingface.co/datasets/nixie1981/climate_narratives
+- `annotated_Australia_100.csv` - Annotated Australian climate change articles (100 articles). The file does not contain full texts of articles due to copyright restrictions; they can be retrieved from Proquest using the provided IDs. Please contact the authors of the paper in case of any issues.
+- `COVID_speeches.xlsx` - Speeches on COVID-19 by heads of Australia, Britain and Germany (Feb-June 2020). Also available at https://huggingface.co/datasets/nixie1981/covid_speeches
 
 ## 🔗 Quick Links
 
 - **[Explore the Interactive Paper Website](https://julia-nixie.github.io/narratives/)**
 - **[📖 Read the Full Paper]((https://arxiv.org/abs/2506.00737)**
 - **[📧 Contact Authors](mailto:y.otmakhova@unimelb.edu.au)**
-- **[🏛️ University of Melbourne](https://www.unimelb.edu.au/)**
 
 ## 📝 Citation
 
